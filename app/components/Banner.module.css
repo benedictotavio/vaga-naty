@@ -1,0 +1,39 @@
+#banner {
+    background-image: url("../../public/bg_home.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: 25%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#banner #text_banner{
+    width: 70%;
+}
+#banner h1 {
+    font-size: 52px;
+    background: -webkit-linear-gradient(top left, #86cce7, #38afdf, #f587e2, rgb(191, 98, 194));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+#banner p {
+    font-size: 20px;
+    color: #eee;
+}
+
+@media (max-width:600px){
+    #banner h1 {
+        font-size: 30px;
+    }
+    
+    #banner p {
+        font-size: 15px;
+        color: #eee;
+    }
+    #banner #text_banner{
+        width: 80%;
+    }
+}
