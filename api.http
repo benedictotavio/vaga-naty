@@ -1,0 +1,25 @@
+POST https://api-deslocamento.herokuapp.com/api/v1/Cliente
+Content-Type: application/json
+
+{
+    "id": 153,
+    "numeroDocumento": "123456789",
+    "tipoDocumento": "RG",
+    "nome": "Test 1",
+    "logradouro": "Rua de Teste",
+    "numero": "2213",
+    "bairro": "Centro",    
+    "cidade": "Curitiba",
+    "uf": "SP"
+}
+
+###
+GET https://api-deslocamento.herokuapp.com/api/v1/Cliente
+
+###
+DELETE https://api-deslocamento.herokuapp.com/api/v1/Cliente/183
+Content-Type: application/json
+
+{
+  "id": 183
+}

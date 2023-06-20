@@ -7,24 +7,20 @@ import CardActions from "@mui/material/CardActions";
 import CardContent from "@mui/material/CardContent";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
+import { Client } from "@/app/api/client/ClientList";
 
-const bull = (
-  <Box
-    component="span"
-    sx={{ display: "inline-block", mx: "2px", transform: "scale(0.8)" }}
-  >
-    •
-  </Box>
-);
-
-type IPropsCard = {
-  title: string;
-  document: string;
-};
-
-export default function ViewCard({ title, document }: IPropsCard) {
+export default function ViewCard({
+  nome,
+  cidade,
+  logradouro,
+  bairro,
+  numero,
+  numeroDocumento,
+  tipoDocumento,
+  uf,
+}: Client) {
   return (
-    <Box sx={{ minWidth: 275 }}>
+    <Box sx={{ maxWidth: 350, minWidth: 250, margin: 3 }}>
       <Card variant="outlined">
         <React.Fragment>
           <CardContent>
@@ -33,29 +29,26 @@ export default function ViewCard({ title, document }: IPropsCard) {
               color="text.secondary"
               gutterBottom
             >
-              {title}
+              {nome}
             </Typography>
             <Typography
               sx={{ fontSize: 16 }}
               color="text.secondary"
               gutterBottom
             >
-              {document}
+              {tipoDocumento}:{numeroDocumento}
             </Typography>
             <Typography variant="h5" component="div">
-              {/* {logradouro} - {bairro}/{cidade}, {numero} */}
-            </Typography>
-            <Typography sx={{ mb: 1.5 }} color="text.secondary">
-              {/* {uf} */}
+              {logradouro}, {numero}
             </Typography>
             <Typography variant="body2">
-              well meaning and kindly.
               <br />
-              {'"a benevolent smile"'}
+              {bairro} - {cidade}/{uf}
             </Typography>
           </CardContent>
           <CardActions>
-            <Button size="small">Learn More</Button>
+            <Button size="small">Trash</Button>
+            <Button size="small">Update</Button>
           </CardActions>
         </React.Fragment>
       </Card>

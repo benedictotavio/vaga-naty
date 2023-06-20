@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from "react";
 import ViewCard from "@/app/components/items/Card";
+import { useClientContext } from "@/app/context/ClientStore";
+import { Box } from "@mui/material";
 
 export type Client = {
   id?: number;
@@ -15,31 +17,29 @@ export type Client = {
 
 const ClientList = () => {
   const [client, setClient] = useState<Client[]>([]);
-
+  const { getClients } = useClientContext();
   useEffect(() => {
-    getClient();
-  }, []);
+    getClients().then((res) => setClient(res));
+  }, [getClients]);
 
-  const getClient = async () => {
-    try {
-      const response = await fetch(
-        "https://api-deslocamento.herokuapp.com/api/v1/Cliente"
-      );
-      const results = await response.json();
-      setClient(results);
-    } catch (error) {
-      console.log(error);
-    }
-  };
   return (
     <>
       <div>
-        <h2>ClientList</h2>
-        <ul>
-          {client.map((item: Client, i: number) => (
-            <ViewCard key={i} title={item.nome} document={item.numeroDocumento} />
+        <Box display="flex" justifyContent="center" flexWrap="wrap">
+          {client.map((item: Client) => (
+            <ViewCard
+              key={item.id}
+              bairro={item.bairro}
+              cidade={item.cidade}
+              nome={item.nome}
+              logradouro={item.logradouro}
+              numero={item.numero}
+              numeroDocumento={item.numeroDocumento}
+              tipoDocumento={item.tipoDocumento}
+              uf={item.uf}
+            />
           ))}
-        </ul>
+        </Box>
       </div>
     </>
   );
