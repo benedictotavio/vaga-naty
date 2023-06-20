@@ -7,7 +7,6 @@ import CardActions from "@mui/material/CardActions";
 import CardContent from "@mui/material/CardContent";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
-import { UserData } from "@/app/cliente/page";
 
 const bull = (
   <Box
@@ -18,16 +17,12 @@ const bull = (
   </Box>
 );
 
-export default function ViewCard({
-  nome,
-  bairro,
-  cidade,
-  logradouro,
-  numero,
-  numeroDocumento,
-  tipoDocumento,
-  uf,
-}: UserData) {
+type IPropsCard = {
+  title: string;
+  document: string;
+};
+
+export default function ViewCard({ title, document }: IPropsCard) {
   return (
     <Box sx={{ minWidth: 275 }}>
       <Card variant="outlined">
@@ -38,20 +33,20 @@ export default function ViewCard({
               color="text.secondary"
               gutterBottom
             >
-              {nome}
+              {title}
             </Typography>
             <Typography
               sx={{ fontSize: 16 }}
               color="text.secondary"
               gutterBottom
             >
-              {tipoDocumento} : {numeroDocumento}
+              {document}
             </Typography>
             <Typography variant="h5" component="div">
-              {logradouro} - {bairro}/{cidade}, {numero}
+              {/* {logradouro} - {bairro}/{cidade}, {numero} */}
             </Typography>
             <Typography sx={{ mb: 1.5 }} color="text.secondary">
-              {uf}
+              {/* {uf} */}
             </Typography>
             <Typography variant="body2">
               well meaning and kindly.
