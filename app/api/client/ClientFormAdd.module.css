@@ -1,0 +1,12 @@
+.formAdd {
+    margin-top: 10%;
+    padding: 10px 15px;
+    min-height: 75vh;
+    background-color: aliceblue;
+    top: '50%';
+    left: '50%';
+    right: 'auto';
+    bottom: 'auto';
+    margin-right: '-50%';
+    transform: 'translate(-50%; -50%)';
+}

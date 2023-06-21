@@ -17,10 +17,10 @@ export type Client = {
 
 const ClientList = () => {
   const [client, setClient] = useState<Client[]>([]);
-  const { getClients } = useClientContext();
+  const { getClients, update } = useClientContext();
   useEffect(() => {
     getClients().then((res) => setClient(res));
-  }, [getClients]);
+  }, [getClients, update]);
 
   return (
     <>
@@ -37,6 +37,7 @@ const ClientList = () => {
               numeroDocumento={item.numeroDocumento}
               tipoDocumento={item.tipoDocumento}
               uf={item.uf}
+              id={item.id}
             />
           ))}
         </Box>

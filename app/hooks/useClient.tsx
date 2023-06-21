@@ -1,3 +1,5 @@
+import { useState } from "react";
+
 export type Client = {
   numeroDocumento: string;
   tipoDocumento: string;
@@ -9,10 +11,14 @@ export type Client = {
   uf: string;
 };
 
+export interface UpdateClient extends Partial<Client> {
+  id: number;
+}
+
 export default function useClient() {
+  const [update, setUpdate] = useState(false);
   async function saveClient(payload: Client) {
     if (payload) {
-      console.log(payload);
       try {
         await fetch("https://api-deslocamento.herokuapp.com/api/v1/Cliente", {
           method: "POST",
@@ -20,6 +26,7 @@ export default function useClient() {
           headers: { "Content-type": "application/json;charset=UTF-8" },
           body: JSON.stringify(payload),
         }).then((res) => res.json());
+        setUpdate(!update);
       } catch (error) {
         console.error(error);
       }
@@ -38,5 +45,45 @@ export default function useClient() {
       console.log(error);
     }
   }
-  return { saveClient, getClients };
+  async function deleteClient(id: number) {
+    if (id) {
+      try {
+        await fetch(
+          `https://api-deslocamento.herokuapp.com/api/v1/Cliente/${id}`,
+          {
+            method: "DELETE",
+            cache: "default",
+            headers: { "Content-type": "application/json;charset=UTF-8" },
+            body: JSON.stringify({ id: id }),
+          }
+        ).then((res) => res.json());
+        setUpdate(!update);
+      } catch (error) {
+        console.error(error);
+      }
+    } else {
+      throw new Error("Erro ao deletar");
+    }
+  }
+  async function editClient(payload: UpdateClient) {
+    if (payload) {
+      try {
+        await fetch(
+          `https://api-deslocamento.herokuapp.com/api/v1/Cliente/${payload.id}`,
+          {
+            method: "PUT",
+            cache: "default",
+            headers: { "Content-type": "application/json;charset=UTF-8" },
+            body: JSON.stringify(payload),
+          }
+        ).then((res) => res.json());
+        setUpdate(!update);
+      } catch (error) {
+        console.error(error);
+      }
+    } else {
+      throw new Error("Erro ao deletar");
+    }
+  }
+  return { saveClient, getClients, deleteClient, editClient, update };
 }
