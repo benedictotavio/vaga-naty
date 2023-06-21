@@ -8,7 +8,7 @@ import CardContent from "@mui/material/CardContent";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import { Client } from "@/app/api/client/ClientList";
-import { useClientContext } from "@/app/context/ClientStore";
+import { useGlobalContext } from "@/app/context/store";
 import {
   FormControlLabel,
   Modal,
@@ -32,7 +32,7 @@ export default function ViewCard({
   uf,
   id,
 }: Client) {
-  const { deleteClient, editClient } = useClientContext();
+  const { deleteClient, editClient } = useGlobalContext();
   const [name, setName] = useState<string>(nome);
   const [documentNumber, setDocumentNumber] = useState<string>(numeroDocumento);
   const [document, setDocument] = useState<string>(tipoDocumento);
@@ -61,6 +61,7 @@ export default function ViewCard({
     console.log(user_id);
     try {
       await deleteClient(user_id);
+      window.alert('Cliente deletado com sucesso')
     } catch (error) {
       console.error(error);
       window.alert("Não foi possivel deletar o cliente");
@@ -70,12 +71,12 @@ export default function ViewCard({
   const handleEdit = async (payload: UpdateClient) => {
     try {
       if (payload) {
-        console.log(payload);
         await editClient(payload);
+        window.alert('Cliente alterado com sucesso!')
       }
     } catch (error) {
       console.error(error);
-      window.alert("Não foi possivel editar o cliente");
+      window.alert("Não foi possivel editar o cliente!");
     }
   };
 

@@ -8,12 +8,12 @@ import {
   Radio,
   Modal,
 } from "@mui/material";
-import { useClientContext } from "@/app/context/ClientStore";
+import { useGlobalContext } from "@/app/context/store";
 import styles from "./ClientFormAdd.module.css";
 import { AddCircleOutline, CloseRounded } from "@mui/icons-material";
 
 const ClientForm = () => {
-  const { saveClient } = useClientContext();
+  const { saveClient } = useGlobalContext();
   const [name, setName] = useState<string>("");
   const [documentNumber, setDocumentNumber] = useState<string>("");
   const [document, setDocument] = useState<string>("CPF");

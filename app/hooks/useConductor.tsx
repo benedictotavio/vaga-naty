@@ -1,38 +1,19 @@
-import { useState } from "react";
-
-export type Client = {
-  numeroDocumento: string;
-  tipoDocumento: string;
+export type Conductor = {
   nome: string;
-  logradouro: string;
-  numero: string;
-  bairro: string;
-  cidade: string;
-  uf: string;
+  numeroHabilitacao: string;
+  categoriaHabilitacao: string;
+  vencimentoHabilitacao: Date;
 };
 
-export interface UpdateClient extends Partial<Client> {
+export interface UpdateConductor extends Partial<Conductor> {
   id: number;
 }
 
-export default function useClient() {
-  const [update, setUpdate] = useState(false);
-  async function getClientById(id: number) {
+export default function useConductor() {
+  async function getConductors() {
     try {
       const response = await fetch(
-        `https://api-deslocamento.herokuapp.com/api/v1/Cliente/${id}`
-      );
-      const results = await response.json();
-      return results;
-    } catch (error) {
-      console.log(error);
-    }
-  }
-
-  async function getClients() {
-    try {
-      const response = await fetch(
-        "https://api-deslocamento.herokuapp.com/api/v1/Cliente"
+        "https://api-deslocamento.herokuapp.com/api/v1/Condutor"
       );
       const results = await response.json();
       return results;
@@ -40,10 +21,10 @@ export default function useClient() {
       console.error(error);
     }
   }
-  async function saveClient(payload: Client) {
+  async function saveConductor(payload: Conductor): Promise<void> {
     if (payload) {
       try {
-        await fetch("https://api-deslocamento.herokuapp.com/api/v1/Cliente", {
+        await fetch("https://api-deslocamento.herokuapp.com/api/v1/Condutor", {
           method: "POST",
           cache: "default",
           headers: { "Content-type": "application/json;charset=UTF-8" },
@@ -53,10 +34,10 @@ export default function useClient() {
         console.error(error);
       }
     } else {
-      throw new Error("Não foi possivel realizar a requisição!");
+      throw new Error("Não foi possivel adicionar o condutor!");
     }
   }
-  async function deleteClient(id: number) {
+  async function deleteConductor(id: number) {
     if (id) {
       try {
         await fetch(
@@ -67,7 +48,6 @@ export default function useClient() {
             body: JSON.stringify({ id: id }),
           }
         ).then((res) => res.json());
-        setUpdate(!update);
       } catch (error) {
         console.error(error);
       }
@@ -75,11 +55,11 @@ export default function useClient() {
       throw new Error("Erro ao deletar");
     }
   }
-  async function editClient(payload: UpdateClient) {
+  async function editConductor(payload: UpdateConductor) {
     if (payload) {
       try {
         await fetch(
-          `https://api-deslocamento.herokuapp.com/api/v1/Cliente/${payload.id}`,
+          `https://api-deslocamento.herokuapp.com/api/v1/Condutor/${payload.id}`,
           {
             method: "PUT",
             cache: "default",
@@ -87,7 +67,6 @@ export default function useClient() {
             body: JSON.stringify(payload),
           }
         ).then((res) => res.json());
-        setUpdate(!update);
       } catch (error) {
         console.error(error);
       }
@@ -95,5 +74,5 @@ export default function useClient() {
       throw new Error("Erro ao deletar");
     }
   }
-  return { saveClient, getClients, deleteClient, editClient,getClientById };
+  return { saveConductor, getConductors, editConductor, deleteConductor };
 }

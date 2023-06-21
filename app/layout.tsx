@@ -2,7 +2,7 @@ import Footer from "./components/layout/Footer";
 import Navbar from "./components/layout/Navbar";
 import "./globals.css";
 
-import { ClientContextProvider } from "./context/ClientStore";
+import { GlobalContextProvider } from "./context/store";
 
 export const metadata = {
   title: "Naty",
@@ -17,11 +17,11 @@ export default function RootLayout({
   return (
     <html lang="pt-br">
       <body>
-        <ClientContextProvider>
+        <GlobalContextProvider>
           <Navbar />
           {children}
           <Footer />
-        </ClientContextProvider>
+        </GlobalContextProvider>
       </body>
     </html>
   );

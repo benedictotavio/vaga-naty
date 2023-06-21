@@ -14,7 +14,7 @@ Content-Type: application/json
 }
 
 ###
-GET https://api-deslocamento.herokuapp.com/api/v1/Cliente
+GET https://api-deslocamento.herokuapp.com/api/v1/Cliente/83
 
 ###
 DELETE https://api-deslocamento.herokuapp.com/api/v1/Cliente/29
@@ -25,15 +25,31 @@ Content-Type: application/json
 }
 
 ###
-PUT https://api-deslocamento.herokuapp.com/api/v1/Cliente/247
+PUT https://api-deslocamento.herokuapp.com/api/v1/Cliente/31
 Content-Type: application/json
 
 {
-  "id": 247,
+  "id": 31,
   "nome": "Meu Ovo",
   "logradouro": "Teste",
   "numero": "Teste 3",
   "bairro": "wqeq",
   "cidade": "string",
   "uf": "string"
+}
+
+# Condutor
+
+###
+GET https://api-deslocamento.herokuapp.com/api/v1/Condutor
+
+###
+POST https://api-deslocamento.herokuapp.com/api/v1/Condutor
+Content-Type: application/json
+
+{
+  "nome": "Teste 2",
+  "numeroHabilitacao": "3232332",
+  "categoriaHabilitacao": "A",
+  "vencimentoHabilitacao": "2023-10-20T13:39:40.335Z"
 }

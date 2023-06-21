@@ -1,7 +1,12 @@
+import UserSection from "@/app/api/client/ClientSection";
 import React from "react";
 
 const page = ({ params }: any) => {
-  return <div>{params.id}</div>;
+  return (
+    <>
+      <UserSection id={params.id} />
+    </>
+  );
 };
 
 export default page;
