@@ -17,11 +17,11 @@ Content-Type: application/json
 GET https://api-deslocamento.herokuapp.com/api/v1/Cliente
 
 ###
-DELETE https://api-deslocamento.herokuapp.com/api/v1/Cliente/247
+DELETE https://api-deslocamento.herokuapp.com/api/v1/Cliente/29
 Content-Type: application/json
 
 {
-  "id": 247
+  "id": 29
 }
 
 ###

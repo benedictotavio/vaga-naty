@@ -27,18 +27,18 @@ const ClientList = () => {
       <div>
         <Box display="flex" justifyContent="center" flexWrap="wrap">
           {client.map((item: Client) => (
-            <ViewCard
-              key={item.id}
-              bairro={item.bairro}
-              cidade={item.cidade}
-              nome={item.nome}
-              logradouro={item.logradouro}
-              numero={item.numero}
-              numeroDocumento={item.numeroDocumento}
-              tipoDocumento={item.tipoDocumento}
-              uf={item.uf}
-              id={item.id}
-            />
+              <ViewCard
+                key={item.id}
+                bairro={item.bairro}
+                cidade={item.cidade}
+                nome={item.nome}
+                logradouro={item.logradouro}
+                numero={item.numero}
+                numeroDocumento={item.numeroDocumento}
+                tipoDocumento={item.tipoDocumento}
+                uf={item.uf}
+                id={item.id}
+              />
           ))}
         </Box>
       </div>

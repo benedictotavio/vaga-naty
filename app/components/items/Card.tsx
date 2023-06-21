@@ -19,6 +19,7 @@ import {
 import { CloseRounded } from "@mui/icons-material";
 import styles from "../../api/client/ClientFormAdd.module.css";
 import { UpdateClient } from "@/app/hooks/useClient";
+import Link from "next/link";
 
 export default function ViewCard({
   nome,
@@ -223,7 +224,7 @@ export default function ViewCard({
               color="text.secondary"
               gutterBottom
             >
-              {nome}
+              <Link href={`/cliente/${id}`}>{nome}</Link>
             </Typography>
             <Typography
               sx={{ fontSize: 16 }}
