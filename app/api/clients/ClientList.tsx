@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import ViewCard from "@/app/components/items/Card";
+import ViewCard from "@/app/components/items/CardClient";
 import { useGlobalContext } from "@/app/context/store";
 import { Box } from "@mui/material";
 

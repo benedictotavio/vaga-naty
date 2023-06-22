@@ -1,25 +1,19 @@
-import { useState } from "react";
-
-export type Client = {
-  numeroDocumento: string;
-  tipoDocumento: string;
-  nome: string;
-  logradouro: string;
-  numero: string;
-  bairro: string;
-  cidade: string;
-  uf: string;
+export type Vehicles = {
+  placa: string;
+  marcaModelo: string;
+  anoFabricacao: number;
+  kmAtual: number;
 };
 
-export interface UpdateClient extends Partial<Client> {
+export interface UpdateVehicles extends Partial<Vehicles> {
   id: number;
 }
 
-export default function useClient() {
-  async function getClientById(id: number) {
+export default function useVehicles() {
+  async function getVehicleById(id: number) {
     try {
       const response = await fetch(
-        `https://api-deslocamento.herokuapp.com/api/v1/Cliente/${id}`
+        `https://api-deslocamento.herokuapp.com/api/v1/Veiculo/${id}`
       );
       const results = await response.json();
       return results;
@@ -28,10 +22,10 @@ export default function useClient() {
     }
   }
 
-  async function getClients() {
+  async function getVehicles() {
     try {
       const response = await fetch(
-        "https://api-deslocamento.herokuapp.com/api/v1/Cliente"
+        "https://api-deslocamento.herokuapp.com/api/v1/Veiculo"
       );
       const results = await response.json();
       return results;
@@ -39,10 +33,10 @@ export default function useClient() {
       console.error(error);
     }
   }
-  async function saveClient(payload: Client) {
+  async function saveVehicle(payload: Vehicles) {
     if (payload) {
       try {
-        await fetch("https://api-deslocamento.herokuapp.com/api/v1/Cliente", {
+        await fetch("https://api-deslocamento.herokuapp.com/api/v1/Veiculo", {
           method: "POST",
           cache: "default",
           headers: { "Content-type": "application/json;charset=UTF-8" },
@@ -55,11 +49,12 @@ export default function useClient() {
       throw new Error("Não foi possivel realizar a requisição!");
     }
   }
-  async function deleteClient(id: number) {
+
+  async function deleteVehicle(id: number) {
     if (id) {
       try {
         await fetch(
-          `https://api-deslocamento.herokuapp.com/api/v1/Cliente/${id}`,
+          `https://api-deslocamento.herokuapp.com/api/v1/Veiculo/${id}`,
           {
             method: "DELETE",
             headers: { "Content-type": "application/json;charset=UTF-8" },
@@ -73,11 +68,11 @@ export default function useClient() {
       throw new Error("Erro ao deletar");
     }
   }
-  async function editClient(payload: UpdateClient) {
+  async function editVehicle(payload: UpdateVehicles) {
     if (payload) {
       try {
         await fetch(
-          `https://api-deslocamento.herokuapp.com/api/v1/Cliente/${payload.id}`,
+          `https://api-deslocamento.herokuapp.com/api/v1/Veiculo/${payload.id}`,
           {
             method: "PUT",
             cache: "default",
@@ -92,5 +87,11 @@ export default function useClient() {
       throw new Error("Erro ao deletar");
     }
   }
-  return { saveClient, getClients, deleteClient, editClient,getClientById };
+  return {
+    saveVehicle,
+    deleteVehicle,
+    editVehicle,
+    getVehicleById,
+    getVehicles,
+  };
 }

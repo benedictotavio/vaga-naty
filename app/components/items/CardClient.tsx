@@ -1,57 +1,47 @@
+"use client";
+
 import { useState } from "react";
-import {
-  Box,
-  Button,
-  TextField,
-  RadioGroup,
-  FormControlLabel,
-  Radio,
-  Modal,
-} from "@mui/material";
+import Box from "@mui/material/Box";
+import Card from "@mui/material/Card";
+import CardActions from "@mui/material/CardActions";
+import CardContent from "@mui/material/CardContent";
+import Button from "@mui/material/Button";
+import Typography from "@mui/material/Typography";
+import { Client } from "@/app/api/clients/ClientList";
 import { useGlobalContext } from "@/app/context/store";
-import styles from "./ClientFormAdd.module.css";
-import { AddCircleOutline, CloseRounded } from "@mui/icons-material";
+import {
+  FormControlLabel,
+  Modal,
+  Radio,
+  RadioGroup,
+  TextField,
+} from "@mui/material";
+import { CloseRounded } from "@mui/icons-material";
+import styles from "../../api/client/ClientFormAdd.module.css";
+import { UpdateClient } from "@/app/hooks/useClient";
+import Link from "next/link";
 
-const ClientForm = () => {
-  const { saveClient } = useGlobalContext();
-  const [name, setName] = useState<string>("");
-  const [documentNumber, setDocumentNumber] = useState<string>("");
-  const [document, setDocument] = useState<string>("CPF");
-  const [city, setCity] = useState<string>("");
-  const [neighborhood, setNeighborhood] = useState<string>("");
-  const [address, setAddress] = useState<string>("");
-  const [number, setNumber] = useState<string>("");
-  const [country, setCountry] = useState<string>("");
+export default function ViewCard({
+  nome,
+  cidade,
+  logradouro,
+  bairro,
+  numero,
+  numeroDocumento,
+  tipoDocumento,
+  uf,
+  id,
+}: Porp) {
+  const { deleteClient, editClient } = useGlobalContext();
+  const [name, setName] = useState<string>(nome);
+  const [documentNumber, setDocumentNumber] = useState<string>(numeroDocumento);
+  const [document, setDocument] = useState<string>(tipoDocumento);
+  const [city, setCity] = useState<string>(cidade);
+  const [neighborhood, setNeighborhood] = useState<string>(bairro);
+  const [address, setAddress] = useState<string>(logradouro);
+  const [number, setNumber] = useState<string>(numero);
+  const [country, setCountry] = useState<string>(uf);
   const [open, setOpen] = useState(false);
-
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    try {
-      await saveClient({
-        nome: name,
-        numeroDocumento: documentNumber,
-        tipoDocumento: document,
-        cidade: city,
-        bairro: neighborhood,
-        logradouro: address,
-        numero: number,
-        uf: country,
-      });
-      setInterval(() => {
-        setName("");
-        setDocumentNumber("");
-        setCity("");
-        setNeighborhood("");
-        setAddress("");
-        setNumber("");
-        setCountry("");
-      }, 2500);
-    } catch (error) {
-      console.error(error);
-    }
-
-    window.alert("Task Adicionada com sucesso!");
-  };
 
   const handleOpen = async () => {
     setOpen(true);
@@ -65,7 +55,28 @@ const ClientForm = () => {
     event: React.ChangeEvent<HTMLInputElement>
   ) => {
     setDocument(event.target.value);
-    console.log(document);
+  };
+
+  const handleDelete = async (user_id: number) => {
+    try {
+      await deleteClient(user_id);
+      window.alert('Cliente deletado com sucesso')
+    } catch (error) {
+      console.error(error);
+      window.alert("Não foi possivel deletar o cliente");
+    }
+  };
+
+  const handleEdit = async (payload: UpdateClient) => {
+    try {
+      if (payload) {
+        await editClient(payload);
+        window.alert('Cliente alterado com sucesso!')
+      }
+    } catch (error) {
+      console.error(error);
+      window.alert("Não foi possivel editar o cliente!");
+    }
   };
 
   return (
@@ -75,8 +86,26 @@ const ClientForm = () => {
         onClose={handleClose}
         aria-labelledby="parent-modal-title"
         aria-describedby="parent-modal-description"
+        sx={{
+          backgroundColor: "#fff",
+        }}
       >
-        <form className={styles.formAdd} onSubmit={handleSubmit}>
+        <form
+          className={styles.formAdd}
+          onSubmit={() =>
+            handleEdit({
+              id: id as number,
+              nome: name,
+              numeroDocumento: documentNumber,
+              tipoDocumento: document,
+              cidade: city,
+              bairro: neighborhood,
+              logradouro: address,
+              numero: number,
+              uf: country,
+            })
+          }
+        >
           <Button onClick={handleClose}>
             <CloseRounded />
           </Button>
@@ -97,7 +126,12 @@ const ClientForm = () => {
             alignItems="center"
           >
             <RadioGroup value={document} onChange={handleOptionChange}>
-              <FormControlLabel value="CPF" control={<Radio />} label="CPF" />
+              <FormControlLabel
+                value="CPF"
+                control={<Radio />}
+                label="CPF"
+                defaultChecked
+              />
               <FormControlLabel value="RG" control={<Radio />} label="RG" />
               <FormControlLabel value="CNH" control={<Radio />} label="CNH" />
               <FormControlLabel value="CNPJ" control={<Radio />} label="CNPJ" />
@@ -182,11 +216,41 @@ const ClientForm = () => {
         </form>
       </Modal>
 
-      <Button onClick={handleOpen} variant="contained" color="primary">
-        <AddCircleOutline /> Adicionar Cliente
-      </Button>
+      <Box sx={{ maxWidth: 350, minWidth: 250, margin: 3 }}>
+        <Card variant="outlined">
+          <CardContent>
+            <Typography
+              sx={{ fontSize: 14 }}
+              color="text.secondary"
+              gutterBottom
+            >
+              <Link href={`/cliente/${id}`}>{nome}</Link>
+            </Typography>
+            <Typography
+              sx={{ fontSize: 16 }}
+              color="text.secondary"
+              gutterBottom
+            >
+              {tipoDocumento}:{numeroDocumento}
+            </Typography>
+            <Typography variant="h5" component="div">
+              {logradouro}, {numero}
+            </Typography>
+            <Typography variant="body2">
+              <br />
+              {bairro} - {cidade}/{uf}
+            </Typography>
+          </CardContent>
+          <CardActions>
+            <Button size="small" onClick={() => handleDelete(id as number)}>
+              Trash
+            </Button>
+            <Button size="small" onClick={handleOpen}>
+              Update
+            </Button>
+          </CardActions>
+        </Card>
+      </Box>
     </>
   );
-};
-
-export default ClientForm;
+}

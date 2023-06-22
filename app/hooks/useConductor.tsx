@@ -1,7 +1,7 @@
 export type Conductor = {
   nome: string;
   numeroHabilitacao: string;
-  categoriaHabilitacao: string;
+  catergoriaHabilitacao: string;
   vencimentoHabilitacao: Date;
 };
 
@@ -10,6 +10,17 @@ export interface UpdateConductor extends Partial<Conductor> {
 }
 
 export default function useConductor() {
+  async function getConductorById(id: number) {
+    try {
+      const response = await fetch(
+        `https://api-deslocamento.herokuapp.com/api/v1/Condutor/${id}`
+      );
+      const results = await response.json();
+      return results;
+    } catch (error) {
+      console.error(error);
+    }
+  }
   async function getConductors() {
     try {
       const response = await fetch(
@@ -41,7 +52,7 @@ export default function useConductor() {
     if (id) {
       try {
         await fetch(
-          `https://api-deslocamento.herokuapp.com/api/v1/Cliente/${id}`,
+          `https://api-deslocamento.herokuapp.com/api/v1/Condutor/${id}`,
           {
             method: "DELETE",
             headers: { "Content-type": "application/json;charset=UTF-8" },
@@ -74,5 +85,5 @@ export default function useConductor() {
       throw new Error("Erro ao deletar");
     }
   }
-  return { saveConductor, getConductors, editConductor, deleteConductor };
+  return { saveConductor, getConductors, editConductor, deleteConductor,getConductorById };
 }

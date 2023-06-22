@@ -1,7 +1,7 @@
 "use client";
 import React, { useState } from "react";
-import ClientForm from "../api/client/ClientFormAdd";
-import ClientList from "../api/client/ClientList";
+import ClientForm from "../api/clients/ClientFormAdd";
+import ClientList from "../api/clients/ClientList";
 
 const page = () => {
   return (

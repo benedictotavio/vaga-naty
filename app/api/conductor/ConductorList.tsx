@@ -1,33 +1,35 @@
 "use client";
 
+import CardConductor from "@/app/components/items/CardConductor";
 import { useGlobalContext } from "@/app/context/store";
 import { Conductor } from "@/app/hooks/useConductor";
 import { useEffect, useState } from "react";
 
-interface PropsCondutor extends Conductor {
+export interface PropsCondutor extends Conductor {
   id?: number;
 }
 
 const ConductorList = () => {
   const [conductor, setConductor] = useState<PropsCondutor[]>([]);
-  const { getConductors, saveConductor } = useGlobalContext();
+  const { getConductors, saveConductor, deleteConductor, editConductor } =
+    useGlobalContext();
 
   useEffect(() => {
     getConductors().then((res) => setConductor(res));
-  }, [getConductors, saveConductor]);
+  }, [getConductors, saveConductor, deleteConductor, editConductor]);
 
   return (
     <>
-      <ul>
-        {conductor.map((item: Conductor, i) => (
-          <div key={i}>
-            <li>{item.nome}</li>
-            <li>
-              {item.categoriaHabilitacao}: {item.numeroHabilitacao}
-            </li>
-          </div>
-        ))}
-      </ul>
+      {conductor.map((item: PropsCondutor) => (
+        <CardConductor
+          key={item.id}
+          nome={item.nome}
+          numeroHabilitacao={item.numeroHabilitacao}
+          catergoriaHabilitacao={item.catergoriaHabilitacao}
+          vencimentoHabilitacao={item.vencimentoHabilitacao}
+          id={item.id}
+        />
+      ))}
     </>
   );
 };

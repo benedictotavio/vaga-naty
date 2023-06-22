@@ -1,4 +1,4 @@
-import UserSection from "@/app/api/clients/ClientSection";
+import UserSection from "@/app/api/conductor/ConductorSection";
 import React from "react";
 
 const page = ({ params }: any) => {

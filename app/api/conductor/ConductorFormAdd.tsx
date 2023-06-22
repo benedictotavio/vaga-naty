@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 import { useGlobalContext } from "@/app/context/store";
 import { AddCircleOutline, CloseRounded } from "@mui/icons-material";
@@ -27,7 +27,7 @@ const ConductorFormAdd = () => {
     e.preventDefault();
     try {
       saveConductor({
-        categoriaHabilitacao: cnhCategory,
+        catergoriaHabilitacao: cnhCategory,
         nome: name,
         numeroHabilitacao: cnh,
         vencimentoHabilitacao: expireCnh,
@@ -36,6 +36,7 @@ const ConductorFormAdd = () => {
       window.alert("Erro ao adicionar o condutor");
     }
   };
+
   return (
     <>
       <Modal

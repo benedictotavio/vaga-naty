@@ -53,3 +53,11 @@ Content-Type: application/json
   "categoriaHabilitacao": "A",
   "vencimentoHabilitacao": "2023-10-20T13:39:40.335Z"
 }
+
+###
+DELETE  https://api-deslocamento.herokuapp.com/api/v1/Condutor/158
+Content-Type: application/json
+
+{
+  "id":158
+}
