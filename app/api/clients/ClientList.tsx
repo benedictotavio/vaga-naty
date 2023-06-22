@@ -2,21 +2,14 @@ import React, { useEffect, useState } from "react";
 import ViewCard from "@/app/components/items/CardClient";
 import { useGlobalContext } from "@/app/context/store";
 import { Box } from "@mui/material";
+import { Client } from "@/app/hooks/useClient";
 
-export type Client = {
-  id?: number;
-  numeroDocumento: string;
-  tipoDocumento: string;
-  nome: string;
-  logradouro: string;
-  numero: string;
-  bairro: string;
-  cidade: string;
-  uf: string;
+export interface PropsClient extends Client {
+  id: number;
 };
 
 const ClientList = () => {
-  const [client, setClient] = useState<Client[]>([]);
+  const [client, setClient] = useState<PropsClient[]>([]);
   const { getClients, saveClient, deleteClient } = useGlobalContext();
   useEffect(() => {
     getClients().then((res) => setClient(res));
@@ -26,7 +19,7 @@ const ClientList = () => {
     <>
       <div>
         <Box display="flex" justifyContent="center" flexWrap="wrap">
-          {client.map((item: Client) => (
+          {client.map((item) => (
             <ViewCard
               key={item.id}
               bairro={item.bairro}

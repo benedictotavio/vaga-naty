@@ -10,7 +10,7 @@ export interface UpdateVehicles extends Partial<Vehicles> {
 }
 
 export default function useVehicles() {
-  async function getVehicleById(id: number) {
+  async function getVehicleById(id: number): Promise<UpdateVehicles | void> {
     try {
       const response = await fetch(
         `https://api-deslocamento.herokuapp.com/api/v1/Veiculo/${id}`
@@ -18,10 +18,9 @@ export default function useVehicles() {
       const results = await response.json();
       return results;
     } catch (error) {
-      console.error(error);
+      console.error("Erro: ", error);
     }
   }
-
   async function getVehicles() {
     try {
       const response = await fetch(
@@ -49,7 +48,6 @@ export default function useVehicles() {
       throw new Error("Não foi possivel realizar a requisição!");
     }
   }
-
   async function deleteVehicle(id: number) {
     if (id) {
       try {

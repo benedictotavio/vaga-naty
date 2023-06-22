@@ -11,17 +11,19 @@ export interface PropsVehicles extends Vehicles {
 
 const VehiclesList = () => {
   const [vehicles, setVehicles] = useState<PropsVehicles[]>([]);
-  const { getVehicles } = useGlobalContext();
+  const { getVehicles, saveVehicle, deleteVehicle, editVehicle } =
+    useGlobalContext();
 
   useEffect(() => {
     getVehicles().then((res) => setVehicles(res));
-  }, [getVehicles]);
+  }, [getVehicles, saveVehicle, deleteVehicle, editVehicle]);
 
   return (
     <>
       {vehicles.map((item: PropsVehicles) => (
         <CardVehicles
           key={item.id}
+          id={item.id}
           placa={item.placa}
           marcaModelo={item.marcaModelo}
           anoFabricacao={item.anoFabricacao}
@@ -31,4 +33,4 @@ const VehiclesList = () => {
     </>
   );
 };
-export default VehiclesList
+export default VehiclesList;

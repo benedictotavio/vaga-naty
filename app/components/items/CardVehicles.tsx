@@ -1,6 +1,6 @@
 import { PropsVehicles } from "@/app/api/vehicles/VehiclesList";
 import { useGlobalContext } from "@/app/context/store";
-import { Vehicles } from "@/app/hooks/useVehicles";
+import { UpdateVehicles } from "@/app/hooks/useVehicles";
 import { CloseRounded } from "@mui/icons-material";
 import {
   Box,
@@ -23,7 +23,7 @@ const CardVehicles = ({
   placa,
   id,
 }: PropsVehicles) => {
-  const { deleteVehicle } = useGlobalContext();
+  const { deleteVehicle, editVehicle } = useGlobalContext();
   const [streetSign, setStreetSign] = useState(placa);
   const [yearManufacturing, setYearManufacturing] =
     useState<number>(anoFabricacao);
@@ -34,20 +34,30 @@ const CardVehicles = ({
   const handleOpen = async () => {
     setOpen(true);
   };
-
   const handleClose = async () => {
     setOpen(false);
   };
   const handleDelete = async (user_id: number) => {
-    if (window.confirm("Deseja deletar o condutor?") == true) {
+    if (window.confirm("Deseja deletar o veiculo?") == true) {
       try {
         await deleteVehicle(user_id);
-        window.alert("Condutor deletado com sucesso!");
+        window.alert("Veiculo deletado com sucesso!");
       } catch (error) {
         console.error("Erro!:", error);
       }
     } else {
       console.error("Cliente não deletado!");
+    }
+  };
+  const handleEdit = async (payload: UpdateVehicles) => {
+    try {
+      if (payload) {
+        await editVehicle(payload);
+        window.alert("Cliente alterado com sucesso!");
+      }
+    } catch (error) {
+      console.error(error);
+      window.alert("Não foi possivel editar o cliente!");
     }
   };
   return (
@@ -61,7 +71,17 @@ const CardVehicles = ({
           backgroundColor: "#fff",
         }}
       >
-        <form>
+        <form
+          onSubmit={() =>
+            handleEdit({
+              id: id as number,
+              anoFabricacao: yearManufacturing,
+              kmAtual: actualKm,
+              marcaModelo: modelCar,
+              placa: streetSign,
+            })
+          }
+        >
           <Button onClick={handleClose}>
             <CloseRounded />
           </Button>
@@ -80,7 +100,7 @@ const CardVehicles = ({
               required
               defaultValue={yearManufacturing}
               value={yearManufacturing}
-              onChange={(e) => setYearManufacturing(Number(e.target.value))}
+              onChange={(e) => setYearManufacturing(+e.target.value)}
             />
             <TextField
               type="text"
@@ -100,7 +120,7 @@ const CardVehicles = ({
               required
               defaultValue={actualKm}
               value={actualKm}
-              onChange={(e) => setActualKm(Number(e.target.value))}
+              onChange={(e) => setActualKm(+e.target.value)}
             />
           </FormControl>
           <Button type="submit" variant="contained" color="primary">

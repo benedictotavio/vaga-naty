@@ -1,8 +1,8 @@
 "use client";
 
 import { useGlobalContext } from "@/app/context/store";
+import { Client } from "@/app/hooks/useClient";
 import React, { useEffect, useState } from "react";
-import { Client } from "./ClientList";
 
 type PropClients = {
   id: number;

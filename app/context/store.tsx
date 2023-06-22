@@ -8,11 +8,14 @@ import useConductor, {
 } from "../hooks/useConductor";
 import { PropsCondutor } from "../api/conductor/ConductorList";
 import useVehicles, { UpdateVehicles, Vehicles } from "../hooks/useVehicles";
+import { PropsClient } from "../api/clients/ClientList";
+import useDisplacement, { StartDisplacement } from "../hooks/useDisplacement";
+import { PropsDisplacement } from "../api/displacement/DisplacementList";
 
 interface GlobalContextProps {
   // Client
   saveClient: (payload: Client) => Promise<void>;
-  getClients: () => Promise<Client[]>;
+  getClients: () => Promise<PropsClient[]>;
   getClientById: (id: number) => Promise<any>;
   deleteClient: (id: number) => Promise<void>;
   editClient: (payload: UpdateClient) => Promise<void>;
@@ -25,6 +28,8 @@ interface GlobalContextProps {
   getConductorById: (id: number) => Promise<PropsCondutor>;
 
   // Displacement
+  getDisplacements: () => Promise<PropsDisplacement[]>
+  startDisplacement: (payload: StartDisplacement) => Promise<void>
 
   // Vehicles
   getVehicleById: (id: number) => Promise<any>;
@@ -49,6 +54,14 @@ export const GlobalContextProvider = ({ children }: any) => {
   } = useConductor();
 
   const {
+    deleteDisplacement,
+    finishDisplacement,
+    getDisplacementById,
+    getDisplacements,
+    startDisplacement,
+  } = useDisplacement();
+
+  const {
     getVehicleById,
     deleteVehicle,
     editVehicle,
@@ -70,6 +83,9 @@ export const GlobalContextProvider = ({ children }: any) => {
         deleteConductor,
         editConductor,
         getConductorById,
+
+        getDisplacements,
+        startDisplacement,
 
         getVehicleById,
         deleteVehicle,

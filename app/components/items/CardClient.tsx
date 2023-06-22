@@ -7,7 +7,7 @@ import CardActions from "@mui/material/CardActions";
 import CardContent from "@mui/material/CardContent";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
-import { Client } from "@/app/api/clients/ClientList";
+
 import { useGlobalContext } from "@/app/context/store";
 import {
   FormControlLabel,
@@ -17,9 +17,10 @@ import {
   TextField,
 } from "@mui/material";
 import { CloseRounded } from "@mui/icons-material";
-import styles from "../../api/client/ClientFormAdd.module.css";
+import styles from "@/app/api/clients/ClientFormAdd.module.css";
 import { UpdateClient } from "@/app/hooks/useClient";
 import Link from "next/link";
+import { PropsClient } from "@/app/api/clients/ClientList";
 
 export default function ViewCard({
   nome,
@@ -31,7 +32,7 @@ export default function ViewCard({
   tipoDocumento,
   uf,
   id,
-}: Porp) {
+}: PropsClient) {
   const { deleteClient, editClient } = useGlobalContext();
   const [name, setName] = useState<string>(nome);
   const [documentNumber, setDocumentNumber] = useState<string>(numeroDocumento);

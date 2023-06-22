@@ -61,3 +61,8 @@ Content-Type: application/json
 {
   "id":158
 }
+
+# Veiculos
+
+###
+GET https://api-deslocamento.herokuapp.com/api/v1/Veiculo/6
