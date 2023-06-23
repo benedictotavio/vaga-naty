@@ -9,7 +9,10 @@ import useConductor, {
 import { PropsCondutor } from "../api/conductor/ConductorList";
 import useVehicles, { UpdateVehicles, Vehicles } from "../hooks/useVehicles";
 import { PropsClient } from "../api/clients/ClientList";
-import useDisplacement, { StartDisplacement } from "../hooks/useDisplacement";
+import useDisplacement, {
+  FinishDisplacement,
+  StartDisplacement,
+} from "../hooks/useDisplacement";
 import { PropsDisplacement } from "../api/displacement/DisplacementList";
 
 interface GlobalContextProps {
@@ -28,8 +31,11 @@ interface GlobalContextProps {
   getConductorById: (id: number) => Promise<PropsCondutor>;
 
   // Displacement
-  getDisplacements: () => Promise<PropsDisplacement[]>
-  startDisplacement: (payload: StartDisplacement) => Promise<void>
+  getDisplacements: () => Promise<PropsDisplacement[]>;
+  startDisplacement: (payload: StartDisplacement) => Promise<void>;
+  deleteDisplacement: (id: number) => Promise<void>;
+  finishDisplacement: (payload: FinishDisplacement) => Promise<void>;
+  getDisplacementById: (id: number) => Promise<PropsDisplacement>;
 
   // Vehicles
   getVehicleById: (id: number) => Promise<any>;
@@ -86,6 +92,9 @@ export const GlobalContextProvider = ({ children }: any) => {
 
         getDisplacements,
         startDisplacement,
+        deleteDisplacement,
+        finishDisplacement,
+        getDisplacementById,
 
         getVehicleById,
         deleteVehicle,

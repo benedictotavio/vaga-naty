@@ -69,7 +69,7 @@ function Navbarzz() {
             variant="h6"
             noWrap
             component="a"
-            href="/home"
+            href="/"
             sx={{
               mr: 2,
               display: { xs: "none", md: "flex" },

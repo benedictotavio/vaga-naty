@@ -40,7 +40,7 @@ export default function useVehicles() {
           cache: "default",
           headers: { "Content-type": "application/json;charset=UTF-8" },
           body: JSON.stringify(payload),
-        }).then((res) => res.json());
+        })
       } catch (error) {
         console.error(error);
       }
@@ -58,7 +58,7 @@ export default function useVehicles() {
             headers: { "Content-type": "application/json;charset=UTF-8" },
             body: JSON.stringify({ id: id }),
           }
-        ).then((res) => res.json());
+        )
       } catch (error) {
         console.error(error);
       }

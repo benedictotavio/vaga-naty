@@ -14,7 +14,7 @@ Content-Type: application/json
 }
 
 ###
-GET https://api-deslocamento.herokuapp.com/api/v1/Cliente/83
+GET https://api-deslocamento.herokuapp.com/api/v1/Cliente
 
 ###
 DELETE https://api-deslocamento.herokuapp.com/api/v1/Cliente/29
@@ -65,4 +65,34 @@ Content-Type: application/json
 # Veiculos
 
 ###
-GET https://api-deslocamento.herokuapp.com/api/v1/Veiculo/6
+GET https://api-deslocamento.herokuapp.com/api/v1/Veiculo
+
+# Deslocamento
+###
+GET https://api-deslocamento.herokuapp.com/api/v1/Deslocamento
+
+###
+POST https://api-deslocamento.herokuapp.com/api/v1/Deslocamento/IniciarDeslocamento
+Content-Type: application/json
+
+{
+  "kmInicial": 3,
+  "inicioDeslocamento": "2023-06-22T00:19:30.857Z",
+  "checkList": "Lista de trabalho",
+  "motivo": "Saida para o trabalho",
+  "observacao": "Inico de deslocamento de Teste",
+  "idCondutor": 79,
+  "idVeiculo": 53,
+  "idCliente": 158
+}
+
+###
+PUT https://api-deslocamento.herokuapp.com/api/v1/Deslocamento/12/EncerrarDeslocamento
+Content-Type: application/json
+
+{
+  "id": 12,
+  "kmFinal": 330,
+  "fimDeslocamento": "2023-06-24T02:56:07.493Z",
+  "observacao": "Fim do deslocamento"
+}

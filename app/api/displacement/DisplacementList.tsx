@@ -1,5 +1,6 @@
 "use client";
 
+import CardDisplacement from "@/app/components/items/CardDisplacement";
 import { useGlobalContext } from "@/app/context/store";
 import { StartDisplacement } from "@/app/hooks/useDisplacement";
 import React, { useEffect, useState } from "react";
@@ -16,19 +17,22 @@ const DisplacementList = () => {
   }, [getDisplacements]);
   return (
     <>
-      <ul>
-        {displacement.map((item) => (
-          <>
-            <li>{item.idCondutor}</li>
-            <li>{item.idCliente}</li>
-            <li>
-              {new Date(item.inicioDeslocamento).toLocaleDateString("pt-br", {
-                dateStyle: "medium",
-              })}
-            </li>
-          </>
-        ))}
-      </ul>
+      {displacement.map((item) => (
+        <>
+          <CardDisplacement
+            key={item.id}
+            id={item.id}
+            inicioDeslocamento={item.inicioDeslocamento}
+            kmInicial={item.kmInicial}
+            checkList={item.checkList}
+            motivo={item.motivo}
+            observacao={item.observacao}
+            idCondutor={item.idCondutor}
+            idVeiculo={item.idVeiculo}
+            idCliente={item.idCliente}
+          />
+        </>
+      ))}
     </>
   );
 };

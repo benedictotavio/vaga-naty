@@ -1,7 +1,6 @@
 "use client";
 
 import { useGlobalContext } from "@/app/context/store";
-import useDisplacement from "@/app/hooks/useDisplacement";
 import { CloseRounded } from "@mui/icons-material";
 import { Button, Modal } from "@mui/material";
 import { useState } from "react";
@@ -61,6 +60,9 @@ const DispacementFormAdd = () => {
           </Button>
         </form>
       </Modal>
+      <Button onClick={handleOpen}>
+        Adicionar novo deslocamento
+      </Button>
     </>
   );
 };
