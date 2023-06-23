@@ -14,6 +14,7 @@ import useDisplacement, {
   StartDisplacement,
 } from "../hooks/useDisplacement";
 import { PropsDisplacement } from "../api/displacement/DisplacementList";
+import { PropsVehicles } from "../api/vehicles/VehiclesList";
 
 interface GlobalContextProps {
   // Client
@@ -22,13 +23,14 @@ interface GlobalContextProps {
   getClientById: (id: number) => Promise<any>;
   deleteClient: (id: number) => Promise<void>;
   editClient: (payload: UpdateClient) => Promise<void>;
+  allClients: UpdateClient[];
 
   // Conductor
-  getConductors: () => Promise<Conductor[]>;
   saveConductor: (payload: Conductor) => Promise<void>;
   deleteConductor: (id: number) => Promise<void>;
   editConductor: (payload: UpdateConductor) => Promise<void>;
   getConductorById: (id: number) => Promise<PropsCondutor>;
+  allConductors: Conductor[];
 
   // Displacement
   getDisplacements: () => Promise<PropsDisplacement[]>;
@@ -43,20 +45,27 @@ interface GlobalContextProps {
   editVehicle: (payload: UpdateVehicles) => Promise<void>;
   getVehicles: () => Promise<any>;
   saveVehicle: (payload: Vehicles) => Promise<void>;
+  allVehicles: PropsVehicles[]
 }
 
 const GlobalContext = createContext({} as GlobalContextProps);
 
 export const GlobalContextProvider = ({ children }: any) => {
-  const { saveClient, getClients, deleteClient, editClient, getClientById } =
-    useClient();
+  const {
+    saveClient,
+    getClients,
+    deleteClient,
+    editClient,
+    getClientById,
+    allClients,
+  } = useClient();
 
   const {
-    getConductors,
     saveConductor,
     deleteConductor,
     editConductor,
     getConductorById,
+    allConductors,
   } = useConductor();
 
   const {
@@ -73,18 +82,21 @@ export const GlobalContextProvider = ({ children }: any) => {
     editVehicle,
     getVehicles,
     saveVehicle,
+    allVehicles
   } = useVehicles();
 
   return (
     <GlobalContext.Provider
+
       value={{
         saveClient,
         getClients,
         getClientById,
         deleteClient,
         editClient,
+        allClients,
 
-        getConductors,
+        allConductors,
         saveConductor,
         deleteConductor,
         editConductor,
@@ -101,6 +113,7 @@ export const GlobalContextProvider = ({ children }: any) => {
         editVehicle,
         getVehicles,
         saveVehicle,
+        allVehicles
       }}
     >
       {children}

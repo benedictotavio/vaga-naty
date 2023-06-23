@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { use, useEffect, useState } from "react";
 
 export type Client = {
   numeroDocumento: string;
@@ -16,6 +16,12 @@ export interface UpdateClient extends Partial<Client> {
 }
 
 export default function useClient() {
+  const [allClients, setAllClients] = useState<UpdateClient[]>([]);
+
+  useEffect(() => {
+    getClients().then((res) => setAllClients(res));
+  }, []);
+
   async function getClientById(id: number) {
     try {
       const response = await fetch(
@@ -47,7 +53,7 @@ export default function useClient() {
           cache: "default",
           headers: { "Content-type": "application/json;charset=UTF-8" },
           body: JSON.stringify(payload),
-        })
+        });
       } catch (error) {
         console.error(error);
       }
@@ -65,7 +71,7 @@ export default function useClient() {
             headers: { "Content-type": "application/json;charset=UTF-8" },
             body: JSON.stringify({ id: id }),
           }
-        )
+        );
       } catch (error) {
         console.error(error);
       }
@@ -84,7 +90,7 @@ export default function useClient() {
             headers: { "Content-type": "application/json;charset=UTF-8" },
             body: JSON.stringify(payload),
           }
-        ).then((res) => res.json());
+        );
       } catch (error) {
         console.error(error);
       }
@@ -92,5 +98,12 @@ export default function useClient() {
       throw new Error("Erro ao deletar");
     }
   }
-  return { saveClient, getClients, deleteClient, editClient,getClientById };
+  return {
+    saveClient,
+    getClients,
+    deleteClient,
+    editClient,
+    getClientById,
+    allClients,
+  };
 }

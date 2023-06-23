@@ -1,4 +1,7 @@
+import { useEffect, useState } from "react";
+
 export type Conductor = {
+  id?:number,
   nome: string;
   numeroHabilitacao: string;
   catergoriaHabilitacao: string;
@@ -10,6 +13,12 @@ export interface UpdateConductor extends Partial<Conductor> {
 }
 
 export default function useConductor() {
+  const [allConductors, setallConductors] = useState<Conductor[]>([]);
+
+  useEffect(() => {
+    getConductors().then((res) => setallConductors(res));
+  }, []);
+
   async function getConductorById(id: number) {
     try {
       const response = await fetch(
@@ -40,7 +49,7 @@ export default function useConductor() {
           cache: "default",
           headers: { "Content-type": "application/json;charset=UTF-8" },
           body: JSON.stringify(payload),
-        }).then((res) => res.json());
+        });
       } catch (error) {
         console.error(error);
       }
@@ -77,7 +86,7 @@ export default function useConductor() {
             headers: { "Content-type": "application/json;charset=UTF-8" },
             body: JSON.stringify(payload),
           }
-        ).then((res) => res.json());
+        )
       } catch (error) {
         console.error(error);
       }
@@ -85,5 +94,12 @@ export default function useConductor() {
       throw new Error("Erro ao deletar");
     }
   }
-  return { saveConductor, getConductors, editConductor, deleteConductor,getConductorById };
+  return {
+    saveConductor,
+    getConductors,
+    editConductor,
+    deleteConductor,
+    getConductorById,
+    allConductors
+  };
 }

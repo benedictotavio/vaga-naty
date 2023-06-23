@@ -1,5 +1,6 @@
 import { PropsCondutor } from "@/app/api/conductor/ConductorList";
 import { useGlobalContext } from "@/app/context/store";
+import { UpdateConductor } from "@/app/hooks/useConductor";
 import { CloseRounded } from "@mui/icons-material";
 import {
   Box,
@@ -22,7 +23,8 @@ const CardConductor = ({
   numeroHabilitacao,
   vencimentoHabilitacao,
 }: PropsCondutor) => {
-  const { deleteConductor } = useGlobalContext();
+  const { deleteConductor, editConductor } = useGlobalContext();
+
   const [name, setName] = useState(nome);
   const [cnh, setCnh] = useState(numeroHabilitacao);
   const [expireCnh, setExpireCnh] = useState(vencimentoHabilitacao);
@@ -50,6 +52,18 @@ const CardConductor = ({
     }
   };
 
+  const handleEdit = async (payload: UpdateConductor) => {
+    try {
+      if (payload) {
+        await editConductor(payload);
+        window.alert("Cliente alterado com sucesso!");
+      }
+    } catch (error) {
+      console.error(error);
+      window.alert("Não foi possivel editar o cliente!");
+    }
+  };
+
   return (
     <>
       <Modal
@@ -61,7 +75,17 @@ const CardConductor = ({
           backgroundColor: "#fff",
         }}
       >
-        <form>
+        <form
+          onSubmit={() =>
+            handleEdit({
+              id: id as number,
+              catergoriaHabilitacao: cnhCategory,
+              nome: name,
+              numeroHabilitacao: cnh,
+              vencimentoHabilitacao: expireCnh,
+            })
+          }
+        >
           <Button onClick={handleClose}>
             <CloseRounded />
           </Button>

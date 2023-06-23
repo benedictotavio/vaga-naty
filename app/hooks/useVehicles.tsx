@@ -1,3 +1,6 @@
+import { useEffect, useState } from "react";
+import { PropsVehicles } from "../api/vehicles/VehiclesList";
+
 export type Vehicles = {
   placa: string;
   marcaModelo: string;
@@ -10,6 +13,13 @@ export interface UpdateVehicles extends Partial<Vehicles> {
 }
 
 export default function useVehicles() {
+  
+  const [allVehicles, setAllVehicles] = useState<PropsVehicles[]>([]);
+
+  useEffect(() => {
+    getVehicles().then((res) => setAllVehicles(res));
+  }, []);
+
   async function getVehicleById(id: number): Promise<UpdateVehicles | void> {
     try {
       const response = await fetch(
@@ -40,7 +50,7 @@ export default function useVehicles() {
           cache: "default",
           headers: { "Content-type": "application/json;charset=UTF-8" },
           body: JSON.stringify(payload),
-        })
+        });
       } catch (error) {
         console.error(error);
       }
@@ -58,7 +68,7 @@ export default function useVehicles() {
             headers: { "Content-type": "application/json;charset=UTF-8" },
             body: JSON.stringify({ id: id }),
           }
-        )
+        );
       } catch (error) {
         console.error(error);
       }
@@ -77,7 +87,7 @@ export default function useVehicles() {
             headers: { "Content-type": "application/json;charset=UTF-8" },
             body: JSON.stringify(payload),
           }
-        ).then((res) => res.json());
+        );
       } catch (error) {
         console.error(error);
       }
@@ -91,5 +101,6 @@ export default function useVehicles() {
     editVehicle,
     getVehicleById,
     getVehicles,
+    allVehicles
   };
 }
