@@ -4,7 +4,9 @@ import React from "react";
 const page = ({ params }: any) => {
   return (
     <>
-      <UserSection id={params.id} />
+      <section>
+        <UserSection id={params.id} />
+      </section>
     </>
   );
 };

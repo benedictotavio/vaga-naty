@@ -16,6 +16,17 @@ export type FinishDisplacement = {
   observacao: string;
 };
 
+export interface Displacement extends FinishDisplacement {
+  kmInicial: number;
+  inicioDeslocamento: Date;
+  checkList: string;
+  motivo: string;
+  observacao: string;
+  idCondutor: number;
+  idVeiculo: number;
+  idCliente: number;
+}
+
 export default function useDisplacement() {
   async function startDisplacement(payload: StartDisplacement) {
     if (payload) {
@@ -28,7 +39,7 @@ export default function useDisplacement() {
             headers: { "Content-type": "application/json;charset=UTF-8" },
             body: JSON.stringify(payload),
           }
-        )
+        );
       } catch (error) {
         console.error(error);
       }
@@ -66,7 +77,7 @@ export default function useDisplacement() {
             headers: { "Content-type": "application/json;charset=UTF-8" },
             body: JSON.stringify({ id: id }),
           }
-        )
+        );
       } catch (error) {
         console.error(error);
       }
@@ -85,7 +96,7 @@ export default function useDisplacement() {
             headers: { "Content-type": "application/json;charset=UTF-8" },
             body: JSON.stringify(payload),
           }
-        )
+        );
       } catch (error) {
         console.error(error);
       }

@@ -1,4 +1,3 @@
-import React, { useEffect, useState } from "react";
 import ViewCard from "@/app/components/items/CardClient";
 import { useGlobalContext } from "@/app/context/store";
 import { Box } from "@mui/material";
@@ -11,13 +10,12 @@ export interface PropsClient extends Client {
 const ClientList = () => {
   const { allClients } =
     useGlobalContext();
-
   
 
   return (
     <>
       <Box display="flex" justifyContent="center" flexWrap="wrap">
-        {allClients.map((item) => (
+        {allClients.length > 0 ? allClients.map((item) => (
           <ViewCard
             key={item.id}
             bairro={item.bairro}
@@ -30,7 +28,11 @@ const ClientList = () => {
             uf={item.uf}
             id={item.id}
           />
-        ))}
+        )) : (
+          <div>
+            Não ha clientes cadastrados
+          </div>
+        )}
       </Box>
     </>
   );

@@ -3,7 +3,7 @@
 import { Box, Container, Paper, Typography } from "@mui/material";
 
 import AltRouteIcon from "@mui/icons-material/AltRoute";
-import { Inter, Allerta_Stencil } from "next/font/google";
+import { Allerta_Stencil } from "next/font/google";
 
 const allerta = Allerta_Stencil({
   subsets: ["latin"],

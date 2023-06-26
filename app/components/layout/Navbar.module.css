@@ -1,15 +1,10 @@
 @import url(//db.onlinewebfonts.com/c/c67f26aa1153b1d30673005d464adfd7?family=FracturaND);
 
 #navbar {
-    background: #243B55;
-    /* fallback for old browsers */
-    background: -webkit-linear-gradient(to right, #191d28, #243B55);
-    /* Chrome 10-25, Safari 5.1-6 */
-    background: linear-gradient(to right, #191d28, #243B55);
-    /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    background-color: #fff;
 }
 
 #navbar .nav_item {
-    color: #fff;
+    color: rgb(29, 29, 29);
     text-decoration: none;
 }

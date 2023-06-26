@@ -100,7 +100,6 @@ export default function useVehicles() {
     deleteVehicle,
     editVehicle,
     getVehicleById,
-    getVehicles,
     allVehicles
   };
 }

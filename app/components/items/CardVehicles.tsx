@@ -60,6 +60,7 @@ const CardVehicles = ({
       window.alert("Não foi possivel editar o cliente!");
     }
   };
+  
   return (
     <>
       <Modal

@@ -5,10 +5,16 @@ import CardContent from "@mui/material/CardContent";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import { PropsDisplacement } from "@/app/api/displacement/DisplacementList";
-import { Accordion, AccordionDetails, AccordionSummary } from "@mui/material";
+import {
+  Accordion,
+  AccordionDetails,
+  AccordionSummary,
+  Modal,
+} from "@mui/material";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import { useGlobalContext } from "@/app/context/store";
-import { FinishDisplacement } from "@/app/hooks/useDisplacement";
+import { useState } from "react";
+import { CloseRounded } from "@mui/icons-material";
 
 export default function CardDisplacement({
   inicioDeslocamento,
@@ -17,7 +23,18 @@ export default function CardDisplacement({
   observacao,
   id,
 }: PropsDisplacement) {
-  const { deleteDisplacement, finishDisplacement } = useGlobalContext();
+  
+  const { deleteDisplacement } = useGlobalContext();
+
+  const [open, setOpen] = useState<boolean>(false);
+
+  const handleClose = () => {
+    setOpen(false);
+  };
+
+  const handleOpen = () => {
+    setOpen(true);
+  };
 
   const handleDelete = async (user_id: number) => {
     if (window.confirm("Deseja deletar esse deslocamento?") == true) {
@@ -32,21 +49,38 @@ export default function CardDisplacement({
     }
   };
 
-  const handleFinish = async (payload: FinishDisplacement) => {
-    if (window.confirm("Deseja encerrar esse deslocamento?") == true) {
-      try {
-        await finishDisplacement(payload);
-        window.alert("Condutor finalizado com sucesso!");
-      } catch (error) {
-        console.error("Erro!:", error);
-      }
-    } else {
-      console.error("Cliente não deletado!");
-    }
-  };
-
   return (
     <>
+      <Modal
+        open={open}
+        onClose={handleClose}
+        aria-labelledby="parent-modal-title"
+        aria-describedby="parent-modal-description"
+        sx={{
+          backgroundColor: "#fff",
+          marginY: 10,
+        }}
+      >
+        <Box>
+          <div>
+            <div>
+              <Button onClick={handleClose}>
+                <CloseRounded />
+              </Button>
+            </div>
+            <div>
+              <h1>{id}</h1>
+              <h4>
+                {new Date(inicioDeslocamento).toLocaleDateString("pt-br", {
+                  dateStyle: "medium",
+                })}
+              </h4>
+            </div>
+            <Button href={`/deslocamento/${id}`}>Finalizar Deslocamento</Button>
+          </div>
+        </Box>
+      </Modal>
+
       <Box sx={{ minWidth: 275 }}>
         <Card variant="outlined">
           <CardContent>
@@ -94,8 +128,8 @@ export default function CardDisplacement({
             <Button size="small" onClick={() => handleDelete(id as number)}>
               Delete
             </Button>
-            <Button size="small" onClick={() => handleDelete(id as number)}>
-              Finalizar Deslocamento
+            <Button size="small" onClick={handleOpen}>
+              Visão Geral
             </Button>
           </CardActions>
         </Card>

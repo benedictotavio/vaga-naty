@@ -13,18 +13,22 @@ const VehiclesList = () => {
 
   return (
     <>
-      {allVehicles.map((item) => (
-        <>
-          <CardVehicles
-            key={item.id}
-            id={item.id}
-            placa={item.placa}
-            marcaModelo={item.marcaModelo}
-            anoFabricacao={item.anoFabricacao}
-            kmAtual={item.kmAtual}
-          />
-        </>
-      ))}
+      {allVehicles.length > 0 ? (
+        allVehicles.map((item) => (
+          <>
+            <CardVehicles
+              key={item.id}
+              id={item.id}
+              placa={item.placa}
+              marcaModelo={item.marcaModelo}
+              anoFabricacao={item.anoFabricacao}
+              kmAtual={item.kmAtual}
+            />
+          </>
+        ))
+      ) : (
+        <div>Não ha veiculos cadastrados.</div>
+      )}
     </>
   );
 };

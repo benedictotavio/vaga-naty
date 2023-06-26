@@ -3,10 +3,11 @@
 import { Box } from "@mui/material";
 import Banner from "./components/Banner";
 import MediaCard from "./components/items/MediaCard";
+import styles from "./page.module.css";
 
 export default function Home() {
   return (
-    <>
+    <div className={styles.main}>
       <Banner />
       <Box
         display="flex"
@@ -19,8 +20,8 @@ export default function Home() {
         }}
       >
         <MediaCard title="Cliente" text="Area do Cliente" />
-        <MediaCard title="Cliente" text="Area do Cliente" />
+        <MediaCard title="Deslocamento" text="Ver Deslocamentos" />
       </Box>
-    </>
+    </div>
   );
 }

@@ -58,7 +58,6 @@ function Navbarzz() {
         <Toolbar disableGutters>
           <AltRouteIcon
             sx={{
-              color: "#b469ff",
               fontSize: "2.3em",
               display: { xs: "none", md: "flex" },
             }}

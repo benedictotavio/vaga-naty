@@ -102,7 +102,6 @@ export default function useClient() {
   }
   return {
     saveClient,
-    getClients,
     deleteClient,
     editClient,
     getClientById,

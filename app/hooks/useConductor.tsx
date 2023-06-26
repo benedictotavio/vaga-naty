@@ -13,10 +13,11 @@ export interface UpdateConductor extends Partial<Conductor> {
 }
 
 export default function useConductor() {
-  const [allConductors, setallConductors] = useState<Conductor[]>([]);
+
+  const [allConductors, setAllConductors] = useState<Conductor[]>([]);
 
   useEffect(() => {
-    getConductors().then((res) => setallConductors(res));
+    getConductors().then((res) => setAllConductors(res));
   }, []);
 
   async function getConductorById(id: number) {
@@ -94,6 +95,7 @@ export default function useConductor() {
       throw new Error("Erro ao deletar");
     }
   }
+
   return {
     saveConductor,
     getConductors,

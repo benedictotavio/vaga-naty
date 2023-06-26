@@ -69,7 +69,7 @@ GET https://api-deslocamento.herokuapp.com/api/v1/Veiculo
 
 # Deslocamento
 ###
-GET https://api-deslocamento.herokuapp.com/api/v1/Deslocamento
+GET https://api-deslocamento.herokuapp.com/api/v1/Deslocamento/13
 
 ###
 POST https://api-deslocamento.herokuapp.com/api/v1/Deslocamento/IniciarDeslocamento
