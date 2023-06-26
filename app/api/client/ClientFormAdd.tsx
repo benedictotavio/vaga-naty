@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { ChangeEvent, FormEvent, useState } from "react";
 import {
   Box,
   Button,
@@ -9,7 +9,7 @@ import {
   Modal,
 } from "@mui/material";
 import { useGlobalContext } from "@/app/context/store";
-import styles from "./ClientFormAdd.module.css";
+import styles from "./Client.module.css";
 import { AddCircleOutline, CloseRounded } from "@mui/icons-material";
 
 const ClientForm = () => {
@@ -24,7 +24,7 @@ const ClientForm = () => {
   const [country, setCountry] = useState<string>("");
   const [open, setOpen] = useState(false);
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
     try {
       await saveClient({
@@ -37,6 +37,7 @@ const ClientForm = () => {
         numero: number,
         uf: country,
       });
+      handleClose();
       setInterval(() => {
         setName("");
         setDocumentNumber("");
@@ -49,8 +50,8 @@ const ClientForm = () => {
     } catch (error) {
       console.error(error);
     }
-
-    window.alert("Task Adicionada com sucesso!");
+    window.alert("Cliente adicionado com sucesso!");
+    location.reload();
   };
 
   const handleOpen = async () => {
@@ -127,8 +128,21 @@ const ClientForm = () => {
               margin="normal"
               sx={{ minWidth: 300 }}
               value={city}
-              onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+              onChange={(e: ChangeEvent<HTMLInputElement>) =>
                 setCity(e.target.value)
+              }
+            />
+            <TextField
+              label="UF"
+              variant="outlined"
+              required
+              fullWidth
+              margin="normal"
+              type="text"
+              sx={{ minWidth: 300 }}
+              value={country}
+              onChange={(e: ChangeEvent<HTMLInputElement>) =>
+                setCountry(e.target.value)
               }
             />
             <TextField
@@ -139,7 +153,7 @@ const ClientForm = () => {
               margin="normal"
               sx={{ minWidth: 300 }}
               value={neighborhood}
-              onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+              onChange={(e: ChangeEvent<HTMLInputElement>) =>
                 setNeighborhood(e.target.value)
               }
             />

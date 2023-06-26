@@ -17,25 +17,25 @@ Content-Type: application/json
 GET https://api-deslocamento.herokuapp.com/api/v1/Cliente
 
 ###
-DELETE https://api-deslocamento.herokuapp.com/api/v1/Cliente/29
+DELETE https://api-deslocamento.herokuapp.com/api/v1/Cliente/137
 Content-Type: application/json
 
 {
-  "id": 29
+  "id": 137
 }
 
 ###
-PUT https://api-deslocamento.herokuapp.com/api/v1/Cliente/31
+PUT https://api-deslocamento.herokuapp.com/api/v1/Cliente/165
 Content-Type: application/json
 
 {
-  "id": 31,
-  "nome": "Meu Ovo",
-  "logradouro": "Teste",
-  "numero": "Teste 3",
-  "bairro": "wqeq",
-  "cidade": "string",
-  "uf": "string"
+ "id": 165,
+  "nome": "Teste 2",
+  "logradouro": "editado",
+  "numero": "djfjsh dsd",
+  "bairro": "kmdkja ijfa",
+  "cidade": "oz",
+  "uf": "sp"
 }
 
 # Condutor

@@ -43,14 +43,14 @@ const DispacementFormAdd = () => {
     e.preventDefault();
     try {
       startDisplacement({
-        kmInicial: 0,
-        inicioDeslocamento: new Date(),
-        checkList: "",
-        motivo: "",
-        observacao: "",
-        idCondutor: 0,
-        idVeiculo: 0,
-        idCliente: 0,
+        kmInicial: inicialKm,
+        inicioDeslocamento: inicialDisplacement,
+        checkList: checkList,
+        motivo: reason,
+        observacao: observation,
+        idCondutor: idConductor,
+        idVeiculo: idVehicle,
+        idCliente: idClient,
       });
     } catch (error) {
       window.alert("Erro ao adicionar o condutor");
@@ -78,7 +78,7 @@ const DispacementFormAdd = () => {
           </Button>
           <Typography>Crie um novo deslocamento</Typography>
           <div>
-            <FormControl sx={{ m: 1, minWidth: 80 }}>
+            <FormControl sx={{ m: 1, minWidth: 100 }}>
               <InputLabel id="demo-simple-select-autowidth-label">
                 Selecione o cliente
               </InputLabel>
@@ -92,14 +92,12 @@ const DispacementFormAdd = () => {
               >
                 {allClients.map((item) => (
                   <>
-                    <MenuItem value={item.id}>{item.nome}</MenuItem>
+                    <MenuItem key={item.id} value={item.id}>{item.nome}</MenuItem>
                   </>
                 ))}
               </Select>
             </FormControl>
-          </div>
-          <div>
-            <FormControl sx={{ m: 1, minWidth: 80 }}>
+            <FormControl sx={{ m: 1, minWidth: 100 }}>
               <InputLabel id="demo-simple-select-autowidth-label">
                 Selecione o condutor
               </InputLabel>
@@ -113,14 +111,14 @@ const DispacementFormAdd = () => {
               >
                 {allConductors.map((item) => (
                   <>
-                    <MenuItem value={item.id}>{item.nome}</MenuItem>
+                    <MenuItem key={item.id} value={item.id}>{item.nome}</MenuItem>
                   </>
                 ))}
               </Select>
             </FormControl>
           </div>
           <div>
-            <FormControl sx={{ m: 1, minWidth: 80 }}>
+            <FormControl sx={{ m: 1, minWidth: 100 }}>
               <InputLabel id="demo-simple-select-autowidth-label">
                 Selecione o veiculo
               </InputLabel>
@@ -134,7 +132,7 @@ const DispacementFormAdd = () => {
               >
                 {allVehicles.map((item) => (
                   <>
-                    <MenuItem value={item.id}>
+                    <MenuItem key={item.id} value={item.id}>
                       {item.marcaModelo} - {item.placa}
                     </MenuItem>
                   </>
@@ -149,9 +147,7 @@ const DispacementFormAdd = () => {
                 value={inicialKm}
                 aria-label="Default"
                 valueLabelDisplay="auto"
-                onChange={(e: any) =>
-                  setInicialKm(+e.target.value)
-                }
+                onChange={(e: any) => setInicialKm(+e.target.value)}
               />
             </Box>
           </div>

@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { FormEvent, useState } from "react";
 import Box from "@mui/material/Box";
 import Card from "@mui/material/Card";
 import CardActions from "@mui/material/CardActions";
@@ -9,20 +9,14 @@ import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 
 import { useGlobalContext } from "@/app/context/store";
-import {
-  FormControlLabel,
-  Modal,
-  Radio,
-  RadioGroup,
-  TextField,
-} from "@mui/material";
+import { Avatar, Modal, TextField } from "@mui/material";
 import { CloseRounded } from "@mui/icons-material";
-import styles from "@/app/api/clients/ClientFormAdd.module.css";
-import { UpdateClient } from "@/app/hooks/useClient";
+import styles from "@/app/api/client/Client.module.css";
 import Link from "next/link";
-import { PropsClient } from "@/app/api/clients/ClientList";
+import { PropsClient } from "@/app/api/client/ClientList";
+import { SignpostOutlined, PublicOutlined } from "@mui/icons-material";
 
-export default function ViewCard({
+export default function CardClient({
   nome,
   cidade,
   logradouro,
@@ -35,8 +29,6 @@ export default function ViewCard({
 }: PropsClient) {
   const { deleteClient, editClient } = useGlobalContext();
   const [name, setName] = useState<string>(nome);
-  const [documentNumber, setDocumentNumber] = useState<string>(numeroDocumento);
-  const [document, setDocument] = useState<string>(tipoDocumento);
   const [city, setCity] = useState<string>(cidade);
   const [neighborhood, setNeighborhood] = useState<string>(bairro);
   const [address, setAddress] = useState<string>(logradouro);
@@ -52,36 +44,41 @@ export default function ViewCard({
     setOpen(false);
   };
 
-  const handleOptionChange = async (
-    event: React.ChangeEvent<HTMLInputElement>
-  ) => {
-    setDocument(event.target.value);
-  };
-
   const handleDelete = async (user_id: number) => {
     try {
       await deleteClient(user_id);
-      window.alert('Cliente deletado com sucesso')
+      window.alert("Cliente deletado com sucesso");
     } catch (error) {
       console.error(error);
       window.alert("Não foi possivel deletar o cliente");
     }
   };
 
-  const handleEdit = async (payload: UpdateClient) => {
-    try {
-      if (payload) {
-        await editClient(payload);
-        window.alert('Cliente alterado com sucesso!')
+  const handleEdit = async (e: FormEvent) => {
+    e.preventDefault();
+    if (window.confirm("Deseja alterar o cliente?") === true) {
+      try {
+        await editClient({
+          id: id,
+          nome: name,
+          logradouro: address,
+          numero: number,
+          bairro: neighborhood,
+          cidade: city,
+          uf: country,
+        });
+        handleClose();
+        location.reload();
+      } catch (error) {
+        console.error(error);
       }
-    } catch (error) {
-      console.error(error);
-      window.alert("Não foi possivel editar o cliente!");
+    } else {
+      window.alert("Não foi possivel alterar o cliente");
     }
   };
 
   return (
-    <>
+    <div>
       <Modal
         open={open}
         onClose={handleClose}
@@ -89,24 +86,10 @@ export default function ViewCard({
         aria-describedby="parent-modal-description"
         sx={{
           backgroundColor: "#fff",
+          marginY: 10,
         }}
       >
-        <form
-          className={styles.formAdd}
-          onSubmit={() =>
-            handleEdit({
-              id: id as number,
-              nome: name,
-              numeroDocumento: documentNumber,
-              tipoDocumento: document,
-              cidade: city,
-              bairro: neighborhood,
-              logradouro: address,
-              numero: number,
-              uf: country,
-            })
-          }
-        >
+        <form className={styles.formAdd} onSubmit={handleEdit}>
           <Button onClick={handleClose}>
             <CloseRounded />
           </Button>
@@ -117,37 +100,22 @@ export default function ViewCard({
             fullWidth
             margin="normal"
             value={name}
-            onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-              setName(e.target.value)
-            }
+            onChange={(e) => setName(e.target.value)}
           />
           <Box
             sx={{ display: { xs: "block", md: "flex", sm: "block" } }}
             justifyContent="space-around"
             alignItems="center"
           >
-            <RadioGroup value={document} onChange={handleOptionChange}>
-              <FormControlLabel
-                value="CPF"
-                control={<Radio />}
-                label="CPF"
-                defaultChecked
-              />
-              <FormControlLabel value="RG" control={<Radio />} label="RG" />
-              <FormControlLabel value="CNH" control={<Radio />} label="CNH" />
-              <FormControlLabel value="CNPJ" control={<Radio />} label="CNPJ" />
-            </RadioGroup>
-
             <TextField
-              label="Numero do Domuento"
+              label="UF"
               variant="outlined"
               fullWidth
               margin="normal"
+              type="text"
               sx={{ minWidth: 350, maxWidth: 600 }}
-              value={documentNumber}
-              onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-                setDocumentNumber(e.target.value)
-              }
+              value={country}
+              onChange={(e) => setCountry(e.target.value)}
             />
           </Box>
           <Box
@@ -161,11 +129,10 @@ export default function ViewCard({
               fullWidth
               required
               margin="normal"
+              type="text"
               sx={{ minWidth: 300 }}
               value={city}
-              onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-                setCity(e.target.value)
-              }
+              onChange={(e) => setCity(e.target.value)}
             />
             <TextField
               label="Bairro"
@@ -173,11 +140,10 @@ export default function ViewCard({
               required
               fullWidth
               margin="normal"
+              type="text"
               sx={{ minWidth: 300 }}
               value={neighborhood}
-              onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-                setNeighborhood(e.target.value)
-              }
+              onChange={(e) => setNeighborhood(e.target.value)}
             />
           </Box>
           <Box
@@ -191,11 +157,10 @@ export default function ViewCard({
               required
               fullWidth
               margin="normal"
+              type="text"
               sx={{ minWidth: 300 }}
               value={address}
-              onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-                setAddress(e.target.value)
-              }
+              onChange={(e) => setAddress(e.target.value)}
             />
             <TextField
               label="Nº"
@@ -205,9 +170,7 @@ export default function ViewCard({
               margin="normal"
               sx={{ minWidth: 50, maxWidth: 150 }}
               value={number}
-              onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-                setNumber(e.target.value)
-              }
+              onChange={(e) => setNumber(e.target.value)}
             />
           </Box>
 
@@ -216,34 +179,55 @@ export default function ViewCard({
           </Button>
         </form>
       </Modal>
-
       <Box sx={{ maxWidth: 350, minWidth: 250, margin: 3 }}>
-        <Card variant="outlined">
-          <CardContent>
-            <Typography
-              sx={{ fontSize: 14 }}
-              color="text.secondary"
-              gutterBottom
+        <Card variant="outlined" className={styles.card_client}>
+          <CardContent sx={{ minHeight: 250 }}>
+            <Box
+              display="flex"
+              justifyContent="center"
+              alignItems="center"
+              marginBottom={5}
+              textAlign="center"
             >
-              <Link href={`/cliente/${id}`}>{nome}</Link>
+              <div>
+                <Avatar
+                  alt="Remy Sharp"
+                  src="@/public/icon.png"
+                  sx={{ margin: "0 auto" }}
+                >
+                  C
+                </Avatar>
+                <Link href={`/cliente/${id}`}>
+                  <Typography
+                    variant="h2"
+                    sx={{ fontSize: 32, fontWeight: 700 }}
+                    color="text.secondary"
+                  >
+                    {nome}
+                  </Typography>
+                </Link>
+                <Typography
+                  sx={{ fontSize: 16 }}
+                  color="text.secondary"
+                  gutterBottom
+                >
+                  {tipoDocumento}:{numeroDocumento}
+                </Typography>
+              </div>
+            </Box>
+
+            <Typography variant="h6">
+              <SignpostOutlined /> {logradouro}, {numero}
             </Typography>
-            <Typography
-              sx={{ fontSize: 16 }}
-              color="text.secondary"
-              gutterBottom
-            >
-              {tipoDocumento}:{numeroDocumento}
-            </Typography>
-            <Typography variant="h5" component="div">
-              {logradouro}, {numero}
-            </Typography>
+
             <Typography variant="body2">
               <br />
-              {bairro} - {cidade}/{uf}
+              <PublicOutlined /> {bairro} - {cidade}/{uf}
             </Typography>
           </CardContent>
+
           <CardActions>
-            <Button size="small" onClick={() => handleDelete(id as number)}>
+            <Button size="small" onClick={() => handleDelete(id)}>
               Trash
             </Button>
             <Button size="small" onClick={handleOpen}>
@@ -252,6 +236,6 @@ export default function ViewCard({
           </CardActions>
         </Card>
       </Box>
-    </>
+    </div>
   );
 }

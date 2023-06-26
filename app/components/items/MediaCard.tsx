@@ -15,7 +15,7 @@ type IPropCard = {
 
 export default function MediaCard({ title, text }: IPropCard) {
   return (
-    <Card sx={{ minWidth: 350, minHeight: 100, marginTop: "10px" }}>
+    <Card sx={{ minWidth: 250, minHeight: 100, maxHeight: 250, marginY: 5 }}>
       <CardContent>
         <Typography gutterBottom variant="h5" component="div">
           {title}

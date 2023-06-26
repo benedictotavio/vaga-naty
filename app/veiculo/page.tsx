@@ -5,8 +5,10 @@ import VehiclesFormAdd from "../api/vehicles/VehicleFormAdd";
 const page = () => {
   return (
     <>
-      <VehiclesFormAdd />
-      <VehiclesList />
+      <section>
+        <VehiclesFormAdd />
+        <VehiclesList />
+      </section>
     </>
   );
 };

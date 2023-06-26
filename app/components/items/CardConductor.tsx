@@ -1,3 +1,12 @@
+import * as React from "react";
+import List from "@mui/material/List";
+import ListItem from "@mui/material/ListItem";
+import ListItemText from "@mui/material/ListItemText";
+import ListItemAvatar from "@mui/material/ListItemAvatar";
+import Avatar from "@mui/material/Avatar";
+import ImageIcon from "@mui/icons-material/Image";
+import WorkIcon from "@mui/icons-material/Work";
+import { Delete, Edit } from "@mui/icons-material";
 import { PropsCondutor } from "@/app/api/conductor/ConductorList";
 import { useGlobalContext } from "@/app/context/store";
 import { UpdateConductor } from "@/app/hooks/useConductor";
@@ -132,40 +141,26 @@ const CardConductor = ({
           </Button>
         </form>
       </Modal>
-      <Box sx={{ maxWidth: 350, minWidth: 250, margin: 3 }}>
-        <Card variant="outlined">
-          <CardContent>
-            <Typography
-              sx={{ fontSize: 14 }}
-              color="text.secondary"
-              gutterBottom
-            >
-              <Link href={`/condutor/${id}`}>{nome}</Link>
-            </Typography>
-            <Typography
-              sx={{ fontSize: 16 }}
-              color="text.secondary"
-              gutterBottom
-            >
-              {catergoriaHabilitacao}:{numeroHabilitacao}
-            </Typography>
-            <Typography variant="h5" component="div">
-              Vencimento:{" "}
-              {new Date(expireCnh).toLocaleDateString("pt-br", {
-                dateStyle: "long",
-              })}
-            </Typography>
-          </CardContent>
-          <CardActions>
-            <Button size="small" onClick={() => handleDelete(id as number)}>
-              Trash
-            </Button>
-            <Button size="small" onClick={handleOpen}>
-              Update
-            </Button>
-          </CardActions>
-        </Card>
-      </Box>
+      <List sx={{ minWidth: 400, bgcolor: "background.paper" }}>
+        <ListItem
+          secondaryAction={
+            <>
+              <Button size="small">
+                <Delete onClick={() => handleDelete(id as number)} />
+              </Button>
+            </>
+          }
+        >
+          <ListItemAvatar>
+            <Avatar>
+              <ImageIcon />
+            </Avatar>
+          </ListItemAvatar>
+          <Link href={`/condutor/${id}`}>
+            <ListItemText primary={name} secondary={cnh} />
+          </Link>
+        </ListItem>
+      </List>
     </>
   );
 };

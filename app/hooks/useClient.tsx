@@ -1,4 +1,5 @@
 import { use, useEffect, useState } from "react";
+import { PropsClient } from "../api/client/ClientList";
 
 export type Client = {
   numeroDocumento: string;
@@ -16,7 +17,7 @@ export interface UpdateClient extends Partial<Client> {
 }
 
 export default function useClient() {
-  const [allClients, setAllClients] = useState<UpdateClient[]>([]);
+  const [allClients, setAllClients] = useState<PropsClient[]>([]);
 
   useEffect(() => {
     getClients().then((res) => setAllClients(res));
@@ -81,6 +82,7 @@ export default function useClient() {
   }
   async function editClient(payload: UpdateClient) {
     if (payload) {
+      console.log(payload);
       try {
         await fetch(
           `https://api-deslocamento.herokuapp.com/api/v1/Cliente/${payload.id}`,

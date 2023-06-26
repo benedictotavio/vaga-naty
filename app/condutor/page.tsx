@@ -4,8 +4,10 @@ import ConductorList from "../api/conductor/ConductorList";
 const page = () => {
   return (
     <>
-      <ConductorFormAdd />
-      <ConductorList />
+      <section>
+        <ConductorFormAdd />
+        <ConductorList />
+      </section>
     </>
   );
 };

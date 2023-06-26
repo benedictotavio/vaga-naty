@@ -4,3 +4,11 @@ body {
   box-sizing: border-box;
   background-color: #252833;
 }
+
+body a {
+  text-decoration: none;
+}
+
+body section {
+  min-height: 85vh;
+}

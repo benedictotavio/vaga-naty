@@ -5,8 +5,10 @@ import DispacementFormAdd from "../api/displacement/DisplacementFormAdd";
 const page = () => {
   return (
     <>
-      <DispacementFormAdd />
-      <DisplacementList />
+      <section>
+        <DispacementFormAdd />
+        <DisplacementList />
+      </section>
     </>
   );
 };

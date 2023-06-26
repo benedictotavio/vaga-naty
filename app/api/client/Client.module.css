@@ -1,0 +1,25 @@
+.formAdd {
+    margin-top: 5%;
+    padding: 10px 15px;
+    min-height: 75vh;
+}
+
+.card_client {
+    max-width: 340px;
+    margin: auto;
+    overflow-y: auto;
+    position: relative;
+    z-index: 1;
+    overflow-x: hidden;
+    background: #F0F2F0;
+    /* fallback for old browsers */
+    background: -webkit-linear-gradient(to top, #F0F2F0, #dbedfc, #000C40);
+    /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to top, #F0F2F0, #dbedfc, #000C40);
+    /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    display: flex;
+    transition: 0.3s;
+    flex-direction: column;
+    border-radius: 10px;
+    box-shadow: 0 0 0 4px rgba(255, 255, 255);
+}
