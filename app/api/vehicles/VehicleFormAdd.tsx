@@ -2,7 +2,7 @@
 
 import { useGlobalContext } from "@/app/context/store";
 import { AddCircleOutline, CloseRounded } from "@mui/icons-material";
-import { Button, FormControl, Modal, TextField } from "@mui/material";
+import { Box, Button, FormControl, Modal, TextField } from "@mui/material";
 import React, { ChangeEvent, FormEvent, useState } from "react";
 
 const VehiclesFormAdd = () => {
@@ -45,51 +45,64 @@ const VehiclesFormAdd = () => {
         onClose={handleClose}
         aria-labelledby="parent-modal-title"
         aria-describedby="parent-modal-description"
+        style={{ backgroundColor: "#fff" }}
       >
-        <form onSubmit={handleSubmit}>
-          <Button onClick={handleClose}>
-            <CloseRounded />
-          </Button>
-          <FormControl>
-            <TextField
-              type="text"
-              color="primary"
-              required
-              defaultValue={modelCar}
-              value={modelCar}
-              onChange={(e) => setModelCar(e.target.value)}
-            />
-            <TextField
-              type="number"
-              color="secondary"
-              required
-              defaultValue={yearManufacturing}
-              value={yearManufacturing}
-              onChange={(e) => setYearManufacturing(+e.target.value)}
-            />
-            <TextField
-              id="text"
-              label="Select a date"
-              type="date"
-              color="warning"
-              defaultValue={streetSign}
-              value={streetSign}
-              onChange={(e) => setStreetSign(e.target.value)}
-            />
-            <TextField
-              type="text"
-              color="warning"
-              defaultValue={actualKm}
-              value={actualKm}
-              onChange={(e) => setActualKm(+e.target.value)}
-            />
-          </FormControl>
-          <Button type="submit" variant="contained" color="primary">
-            Enviar
-          </Button>
-        </form>
+        <Box display="flex" justifyContent="center" alignItems="center">
+          <div>
+            <Button onClick={handleClose}>
+              <CloseRounded />
+            </Button>
+            <form onSubmit={handleSubmit}>
+              <FormControl>
+                <TextField
+                  type="text"
+                  color="primary"
+                  label="Modelo"
+                  required
+                  defaultValue={modelCar}
+                  value={modelCar}
+                  onChange={(e) => setModelCar(e.target.value)}
+                />
+                <TextField
+                  type="date"
+                  color="secondary"
+                  label="Ano de fabricação"
+                  required
+                  defaultValue={yearManufacturing}
+                  value={yearManufacturing}
+                  onChange={(e) => setYearManufacturing(+e.target.value)}
+                />
+                <TextField
+                  id="text"
+                  type="text"
+                  label="Placa"
+                  color="warning"
+                  defaultValue={streetSign}
+                  value={streetSign}
+                  onChange={(e) => setStreetSign(e.target.value)}
+                />
+                <TextField
+                  type="text"
+                  color="warning"
+                  label="Km Atual"
+                  defaultValue={actualKm}
+                  value={actualKm}
+                  onChange={(e) => setActualKm(+e.target.value)}
+                />
+              </FormControl>
+              <Button type="submit" variant="contained" color="primary">
+                Enviar
+              </Button>
+            </form>
+          </div>
+        </Box>
       </Modal>
-      <Button onClick={handleOpen} variant="contained" color="primary">
+      <Button
+        onClick={handleOpen}
+        variant="contained"
+        color="primary"
+        style={{ margin: 10 }}
+      >
         <AddCircleOutline /> Adicionar Veiculo
       </Button>
     </>

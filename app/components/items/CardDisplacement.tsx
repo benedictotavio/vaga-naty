@@ -1,3 +1,5 @@
+"use client"
+
 import Box from "@mui/material/Box";
 import Card from "@mui/material/Card";
 import CardActions from "@mui/material/CardActions";
@@ -51,7 +53,7 @@ export default function CardDisplacement({
 
   return (
     <>
-      <Modal
+      {/* <Modal
         open={open}
         onClose={handleClose}
         aria-labelledby="parent-modal-title"
@@ -79,7 +81,7 @@ export default function CardDisplacement({
             <Button href={`/deslocamento/${id}`}>Finalizar Deslocamento</Button>
           </div>
         </Box>
-      </Modal>
+      </Modal> */}
 
       <Box sx={{ minWidth: 275 }}>
         <Card variant="outlined">
@@ -128,7 +130,7 @@ export default function CardDisplacement({
             <Button size="small" onClick={() => handleDelete(id as number)}>
               Delete
             </Button>
-            <Button size="small" onClick={handleOpen}>
+            <Button href={`/deslocamento/${id}`}>
               Visão Geral
             </Button>
           </CardActions>

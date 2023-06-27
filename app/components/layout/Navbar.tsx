@@ -26,7 +26,7 @@ const allerta = Allerta_Stencil({
 
 import Link from "next/link";
 
-const pages = ["cliente", "condutor", "deslocamento","veiculo"];
+const pages = ["cliente", "condutor", "deslocamento", "veiculo"];
 const settings = ["Profile", "Account", "Dashboard", "Logout"];
 
 function Navbarzz() {
@@ -43,17 +43,15 @@ function Navbarzz() {
   const handleOpenUserMenu = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorElUser(event.currentTarget);
   };
-
   const handleCloseNavMenu = () => {
     setAnchorElNav(null);
   };
-
   const handleCloseUserMenu = () => {
     setAnchorElUser(null);
   };
 
   return (
-    <AppBar position="static" id={styles.navbar}>
+    <AppBar position="static"  id={styles.navbar}>
       <Container maxWidth="xl">
         <Toolbar disableGutters>
           <AltRouteIcon
@@ -62,25 +60,6 @@ function Navbarzz() {
               display: { xs: "none", md: "flex" },
             }}
           />
-          <Typography
-            className={allerta.className}
-            variant="h6"
-            noWrap
-            component="a"
-            href="/"
-            sx={{
-              mr: 2,
-              display: { xs: "none", md: "flex" },
-              fontWeight: 700,
-              letterSpacing: ".3rem",
-              color: "#b469ff",
-              textDecoration: "none",
-              fontSize: "2em",
-            }}
-          >
-            MOVEMAGIC
-          </Typography>
-
           <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
             <IconButton
               size="large"
@@ -90,7 +69,7 @@ function Navbarzz() {
               onClick={handleOpenNavMenu}
               color="inherit"
             >
-              <MenuIcon />
+              <MenuIcon color="secondary" />
             </IconButton>
             <Menu
               id="menu-appbar"
@@ -121,6 +100,25 @@ function Navbarzz() {
               ))}
             </Menu>
           </Box>
+          <Typography
+            className={allerta.className}
+            variant="h6"
+            noWrap
+            component="a"
+            href="/"
+            sx={{
+              mr: 2,
+              display: { xs: "none", md: "flex" },
+              fontWeight: 700,
+              letterSpacing: ".3rem",
+              color: "#b469ff",
+              textDecoration: "none",
+              fontSize: "2em",
+            }}
+          >
+            MOVEMAGIC
+          </Typography>
+
           <AltRouteIcon
             sx={{
               display: { xs: "flex", md: "none" },
@@ -134,7 +132,7 @@ function Navbarzz() {
               <Button
                 key={page}
                 onClick={handleCloseNavMenu}
-                sx={{ my: 2, color: "white", display: "block" }}
+                sx={{ my: 2, color: "black", display: "block" }}
               >
                 <Link className={styles.nav_item} href={`/${page}`}>
                   {page}

@@ -59,7 +59,12 @@ const DispacementFormAdd = () => {
 
   return (
     <>
-      <Button onClick={handleOpen} variant="contained" color="primary">
+      <Button
+        onClick={handleOpen}
+        variant="contained"
+        color="primary"
+        style={{ margin: 10 }}
+      >
         <AddCircleOutline />
         Adicionar novo deslocamento
       </Button>
@@ -72,142 +77,147 @@ const DispacementFormAdd = () => {
           backgroundColor: "#fff",
         }}
       >
-        <form onSubmit={handleSubmit}>
-          <Button onClick={handleClose}>
-            <CloseRounded />
-          </Button>
-          <Typography>Crie um novo deslocamento</Typography>
+        <Box display="flex" justifyContent="center" alignItems="center">
           <div>
-            <FormControl sx={{ m: 1, minWidth: 100 }}>
-              <InputLabel id="demo-simple-select-autowidth-label">
-                Selecione o cliente
-              </InputLabel>
-              <Select
-                labelId="demo-simple-select-autowidth-label"
-                id="demo-simple-select-autowidth"
-                value={idClient}
-                onChange={(e) => setIdClient(+e.target.value)}
-                autoWidth
-                label="Client"
-              >
-                {allClients.map((item) => (
-                  <>
-                    <MenuItem key={item.id} value={item.id}>{item.nome}</MenuItem>
-                  </>
-                ))}
-              </Select>
-            </FormControl>
-            <FormControl sx={{ m: 1, minWidth: 100 }}>
-              <InputLabel id="demo-simple-select-autowidth-label">
-                Selecione o condutor
-              </InputLabel>
-              <Select
-                labelId="demo-simple-select-autowidth-label"
-                id="demo-simple-select-autowidth"
-                value={idConductor}
-                onChange={(e) => setIdConductor(+e.target.value)}
-                autoWidth
-                label="Conductor"
-              >
-                {allConductors.map((item) => (
-                  <>
-                    <MenuItem key={item.id} value={item.id}>{item.nome}</MenuItem>
-                  </>
-                ))}
-              </Select>
-            </FormControl>
+            <Button onClick={handleClose}>
+              <CloseRounded />
+            </Button>
+            <form onSubmit={handleSubmit}>
+              <Typography>Crie um novo deslocamento</Typography>
+              <div>
+                <FormControl sx={{ m: 1, minWidth: 220 }}>
+                  <InputLabel id="demo-simple-select-autowidth-label">
+                    Selecione o cliente
+                  </InputLabel>
+                  <Select
+                    labelId="demo-simple-select-autowidth-label"
+                    id="demo-simple-select-autowidth"
+                    value={idClient}
+                    onChange={(e) => setIdClient(+e.target.value)}
+                    autoWidth
+                    label="Client"
+                  >
+                    {allClients.map((item) => (
+                      <MenuItem key={item.id} value={item.id}>
+                        {item.nome}
+                      </MenuItem>
+                    ))}
+                  </Select>
+                </FormControl>
+                <FormControl sx={{ m: 1, minWidth: 220 }}>
+                  <InputLabel id="demo-simple-select-autowidth-label">
+                    Selecione o condutor
+                  </InputLabel>
+                  <Select
+                    labelId="demo-simple-select-autowidth-label"
+                    id="demo-simple-select-autowidth"
+                    value={idConductor}
+                    onChange={(e) => setIdConductor(+e.target.value)}
+                    autoWidth
+                    label="Conductor"
+                  >
+                    {allConductors.map((item) => (
+                      <MenuItem key={item.id} value={item.id}>
+                        {item.nome}
+                      </MenuItem>
+                    ))}
+                  </Select>
+                </FormControl>
+                <FormControl sx={{ m: 1, minWidth: 220 }}>
+                  <InputLabel id="demo-simple-select-autowidth-label">
+                    Selecione o veiculo
+                  </InputLabel>
+                  <Select
+                    labelId="demo-simple-select-autowidth-label"
+                    id="demo-simple-select-autowidth"
+                    value={idVehicle}
+                    onChange={(e) => setIdVehicle(+e.target.value)}
+                    autoWidth
+                    label="Vehicle"
+                  >
+                    {allVehicles.map((item) => (
+                      <MenuItem key={item.id} value={item.id}>
+                        {item.marcaModelo} - {item.placa}
+                      </MenuItem>
+                    ))}
+                  </Select>
+                </FormControl>
+              </div>
+              <div>
+                <Box width={300}>
+                  <Slider
+                    defaultValue={inicialKm}
+                    value={inicialKm}
+                    aria-label="Default"
+                    valueLabelDisplay="auto"
+                    onChange={(e: any) => setInicialKm(+e.target.value)}
+                  />
+                </Box>
+              </div>
+              <div>
+                <TextField
+                  id="dateInput"
+                  label="Select a date"
+                  type="date"
+                  color="warning"
+                  sx={{ m: 1, minWidth: 375 }}
+                  defaultValue={inicialDisplacement}
+                  value={inicialDisplacement}
+                  onChange={(e: ChangeEvent<HTMLInputElement>) =>
+                    setInicialDisplacement(new Date(e.target.value))
+                  }
+                  InputLabelProps={{
+                    shrink: true,
+                  }}
+                />
+              </div>
+              <div>
+                <TextField
+                  type="text"
+                  color="primary"
+                  required
+                  sx={{ m: 1, minWidth: 375 }}
+                  defaultValue={checkList}
+                  value={checkList}
+                  onChange={(e) => setCheckList(e.target.value)}
+                />
+              </div>
+              <div>
+                <TextField
+                  type="text"
+                  color="primary"
+                  required
+                  sx={{ m: 1, minWidth: 375 }}
+                  defaultValue={reason}
+                  value={reason}
+                  onChange={(e) => setReason(e.target.value)}
+                />
+              </div>
+              <div>
+                <TextField
+                  type="text"
+                  color="primary"
+                  required
+                  sx={{ m: 1, minWidth: 375 }}
+                  defaultValue={reason}
+                  value={reason}
+                  onChange={(e) => setReason(e.target.value)}
+                />
+              </div>
+              <div>
+                <TextField
+                  type="text"
+                  color="primary"
+                  required
+                  sx={{ m: 1, minWidth: 375 }}
+                  defaultValue={observation}
+                  value={observation}
+                  onChange={(e) => setObservation(e.target.value)}
+                />
+              </div>
+            </form>
           </div>
-          <div>
-            <FormControl sx={{ m: 1, minWidth: 100 }}>
-              <InputLabel id="demo-simple-select-autowidth-label">
-                Selecione o veiculo
-              </InputLabel>
-              <Select
-                labelId="demo-simple-select-autowidth-label"
-                id="demo-simple-select-autowidth"
-                value={idVehicle}
-                onChange={(e) => setIdVehicle(+e.target.value)}
-                autoWidth
-                label="Vehicle"
-              >
-                {allVehicles.map((item) => (
-                  <>
-                    <MenuItem key={item.id} value={item.id}>
-                      {item.marcaModelo} - {item.placa}
-                    </MenuItem>
-                  </>
-                ))}
-              </Select>
-            </FormControl>
-          </div>
-          <div>
-            <Box width={300}>
-              <Slider
-                defaultValue={inicialKm}
-                value={inicialKm}
-                aria-label="Default"
-                valueLabelDisplay="auto"
-                onChange={(e: any) => setInicialKm(+e.target.value)}
-              />
-            </Box>
-          </div>
-          <div>
-            <TextField
-              id="dateInput"
-              label="Select a date"
-              type="date"
-              color="warning"
-              defaultValue={inicialDisplacement}
-              value={inicialDisplacement}
-              onChange={(e: ChangeEvent<HTMLInputElement>) =>
-                setInicialDisplacement(new Date(e.target.value))
-              }
-              InputLabelProps={{
-                shrink: true,
-              }}
-            />
-          </div>
-          <div>
-            <TextField
-              type="text"
-              color="primary"
-              required
-              defaultValue={checkList}
-              value={checkList}
-              onChange={(e) => setCheckList(e.target.value)}
-            />
-          </div>
-          <div>
-            <TextField
-              type="text"
-              color="primary"
-              required
-              defaultValue={reason}
-              value={reason}
-              onChange={(e) => setReason(e.target.value)}
-            />
-          </div>
-          <div>
-            <TextField
-              type="text"
-              color="primary"
-              required
-              defaultValue={reason}
-              value={reason}
-              onChange={(e) => setReason(e.target.value)}
-            />
-          </div>
-          <div>
-            <TextField
-              type="text"
-              color="primary"
-              required
-              defaultValue={observation}
-              value={observation}
-              onChange={(e) => setObservation(e.target.value)}
-            />
-          </div>
-        </form>
+        </Box>
       </Modal>
     </>
   );

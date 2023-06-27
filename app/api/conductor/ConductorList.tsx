@@ -40,12 +40,14 @@ const ConductorList = () => {
           )}
         </List>
       </Box>
-      <Pagination
-        totalItems={allConductors.length}
-        itemsPerPage={8}
-        currentPage={currentPage}
-        onChange={handlePageChange}
-      />
+      <Box display="flex" justifyContent="center" alignItems="center">
+        <Pagination
+          totalItems={allConductors.length}
+          itemsPerPage={8}
+          currentPage={currentPage}
+          onChange={handlePageChange}
+        />
+      </Box>
     </>
   );
 };

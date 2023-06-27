@@ -60,7 +60,7 @@ const CardVehicles = ({
       window.alert("Não foi possivel editar o cliente!");
     }
   };
-  
+
   return (
     <>
       <Modal
@@ -72,62 +72,68 @@ const CardVehicles = ({
           backgroundColor: "#fff",
         }}
       >
-        <form
-          onSubmit={() =>
-            handleEdit({
-              id: id as number,
-              anoFabricacao: yearManufacturing,
-              kmAtual: actualKm,
-              marcaModelo: modelCar,
-              placa: streetSign,
-            })
-          }
-        >
-          <Button onClick={handleClose}>
-            <CloseRounded />
-          </Button>
-          <FormControl>
-            <TextField
-              type="text"
-              color="primary"
-              required
-              defaultValue={streetSign}
-              value={streetSign}
-              onChange={(e) => setStreetSign(e.target.value)}
-            />
-            <TextField
-              type="number"
-              color="secondary"
-              required
-              defaultValue={yearManufacturing}
-              value={yearManufacturing}
-              onChange={(e) => setYearManufacturing(+e.target.value)}
-            />
-            <TextField
-              type="text"
-              color="warning"
-              value={modelCar}
-              onChange={(e) => setModelCar(e.target.value)}
-            />
-            <TextField
-              type="text"
-              color="warning"
-              value={modelCar}
-              onChange={(e) => setModelCar(e.target.value)}
-            />
-            <TextField
-              type="number"
-              color="secondary"
-              required
-              defaultValue={actualKm}
-              value={actualKm}
-              onChange={(e) => setActualKm(+e.target.value)}
-            />
-          </FormControl>
-          <Button type="submit" variant="contained" color="primary">
-            Enviar
-          </Button>
-        </form>
+        <Box display="flex" justifyContent="center" alignItems="center">
+          <div>
+            <Button onClick={handleClose}>
+              <CloseRounded />
+            </Button>
+            <form
+              onSubmit={() =>
+                handleEdit({
+                  id: id as number,
+                  anoFabricacao: yearManufacturing,
+                  kmAtual: actualKm,
+                  marcaModelo: modelCar,
+                  placa: streetSign,
+                })
+              }
+            >
+              <FormControl>
+                <TextField
+                  type="text"
+                  color="primary"
+                  required
+                  defaultValue={streetSign}
+                  value={streetSign}
+                  onChange={(e) => setStreetSign(e.target.value)}
+                />
+                <TextField
+                  type="number"
+                  color="secondary"
+                  required
+                  defaultValue={yearManufacturing}
+                  value={yearManufacturing}
+                  onChange={(e) => setYearManufacturing(+e.target.value)}
+                />
+                <TextField
+                  type="text"
+                  color="warning"
+                  value={modelCar}
+                  onChange={(e) => setModelCar(e.target.value)}
+                />
+                <TextField
+                  type="text"
+                  color="warning"
+                  value={modelCar}
+                  onChange={(e) => setModelCar(e.target.value)}
+                />
+                <TextField
+                  type="number"
+                  color="secondary"
+                  required
+                  defaultValue={actualKm}
+                  value={actualKm}
+                  onChange={(e) => setActualKm(+e.target.value)}
+                />
+              </FormControl>
+              <div>
+                <Button type="submit" variant="contained" color="primary">
+                  Enviar
+                </Button>
+              </div>
+            </form>
+          </div>
+        </Box>
       </Modal>
       <Box sx={{ maxWidth: 350, minWidth: 250, margin: 3 }}>
         <Card variant="outlined">

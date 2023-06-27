@@ -1,6 +1,9 @@
+"use client";
+
 import { useGlobalContext } from "@/app/context/store";
 import { Displacement, FinishDisplacement } from "@/app/hooks/useDisplacement";
-import { Box, FormControl, Modal, TextField } from "@mui/material";
+import { CloseRounded } from "@mui/icons-material";
+import { Box, Button, FormControl, Modal, TextField } from "@mui/material";
 
 import React, { useEffect, useState } from "react";
 
@@ -9,7 +12,6 @@ type IPropsSectionDisplacement = {
 };
 
 const DisplacementSection = ({ id }: IPropsSectionDisplacement) => {
-
   const [open, setOpen] = useState<boolean>(false);
   const [user, setUser] = useState<Displacement>({
     id: id,
@@ -67,41 +69,46 @@ const DisplacementSection = ({ id }: IPropsSectionDisplacement) => {
           marginY: 10,
         }}
       >
-        <form
-          onSubmit={(e) => {
-            e.preventDefault();
-            handleFinish({
-              id: id,
-              fimDeslocamento: new Date(),
-              kmFinal: finalKm,
-              observacao: obs,
-            });
-            location.reload();
-          }}
-        >
-          <FormControl>
-            <Box>
-              <TextField
-                type="text"
-                color="primary"
-                required
-                defaultValue={finalKm}
-                value={finalKm}
-                onChange={(e) => setFinalKm(+e.target.value)}
-              />
-            </Box>
-            <Box>
-              <TextField
-                type="text"
-                color="primary"
-                required
-                defaultValue={obs}
-                value={obs}
-                onChange={(e) => setObs(e.target.value)}
-              />
-            </Box>
-          </FormControl>
-        </form>
+        <div>
+          <Button onClick={handleClose}>
+            <CloseRounded />
+          </Button>
+          <form
+            onSubmit={(e) => {
+              e.preventDefault();
+              handleFinish({
+                id: id,
+                fimDeslocamento: new Date(),
+                kmFinal: finalKm,
+                observacao: obs,
+              });
+              location.reload();
+            }}
+          >
+            <FormControl>
+              <Box>
+                <TextField
+                  type="text"
+                  color="primary"
+                  required
+                  defaultValue={finalKm}
+                  value={finalKm}
+                  onChange={(e) => setFinalKm(+e.target.value)}
+                />
+              </Box>
+              <Box>
+                <TextField
+                  type="text"
+                  color="primary"
+                  required
+                  defaultValue={obs}
+                  value={obs}
+                  onChange={(e) => setObs(e.target.value)}
+                />
+              </Box>
+            </FormControl>
+          </form>
+        </div>
       </Modal>
 
       <Box>
