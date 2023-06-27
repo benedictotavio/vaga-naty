@@ -193,14 +193,14 @@ export default function CardClient({
                 <Avatar
                   alt="Remy Sharp"
                   src="@/public/icon.png"
-                  sx={{ margin: "0 auto" }}
+                  sx={{ margin: "0 auto", border: "1px solid #000C40" }}
                 >
                   C
                 </Avatar>
                 <Link href={`/cliente/${id}`}>
                   <Typography
                     variant="h2"
-                    sx={{ fontSize: 32, fontWeight: 700 }}
+                    sx={{ fontSize: 26, fontWeight: 700 }}
                     color="text.secondary"
                   >
                     {nome}
@@ -216,7 +216,7 @@ export default function CardClient({
               </div>
             </Box>
 
-            <Typography variant="h6">
+            <Typography variant="h6" sx={{ fontSize: 14 }}>
               <SignpostOutlined /> {logradouro}, {numero}
             </Typography>
 

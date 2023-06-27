@@ -1,10 +1,9 @@
 "use client";
 
 import CardConductor from "@/app/components/items/CardConductor";
-import Pagination from "@/app/components/layout/Pagination";
 import { useGlobalContext } from "@/app/context/store";
 import { Conductor } from "@/app/hooks/useConductor";
-import { Box, List } from "@mui/material";
+import { Box, List, Pagination } from "@mui/material";
 import { useState } from "react";
 
 export interface PropsCondutor extends Conductor {
@@ -16,8 +15,15 @@ const ConductorList = () => {
 
   const [currentPage, setCurrentPage] = useState(1);
 
-  const handlePageChange = (page: number) => {
-    setCurrentPage(page);
+  const [itemsPerPage, setItemPerPage] = useState<number>(6);
+
+  const indexOfLastPost = currentPage * itemsPerPage;
+  const indexOfFirstPost = indexOfLastPost - itemsPerPage;
+
+  const currentItems = allConductors.slice(indexOfFirstPost, indexOfLastPost);
+
+  const handlePageChange = (e: React.ChangeEvent<unknown>, value: number) => {
+    setCurrentPage(value);
   };
 
   return (
@@ -25,7 +31,7 @@ const ConductorList = () => {
       <Box display="flex" justifyContent="center" alignItems="center">
         <List sx={{ minWidth: 400, bgcolor: "background.paper" }}>
           {allConductors.length > 0 ? (
-            allConductors.map((item) => (
+            currentItems.map((item) => (
               <CardConductor
                 key={item.id}
                 nome={item.nome}
@@ -42,9 +48,8 @@ const ConductorList = () => {
       </Box>
       <Box display="flex" justifyContent="center" alignItems="center">
         <Pagination
-          totalItems={allConductors.length}
-          itemsPerPage={8}
-          currentPage={currentPage}
+          page={currentPage}
+          count={Math.ceil(allConductors.length / itemsPerPage)}
           onChange={handlePageChange}
         />
       </Box>

@@ -1,8 +1,7 @@
 import ViewCard from "@/app/components/items/CardClient";
 import { useGlobalContext } from "@/app/context/store";
-import { Box } from "@mui/material";
+import { Box, Pagination } from "@mui/material";
 import { Client } from "@/app/hooks/useClient";
-import Pagination from "@/app/components/layout/Pagination";
 import { useState } from "react";
 
 export interface PropsClient extends Client {
@@ -12,20 +11,30 @@ export interface PropsClient extends Client {
 const ClientList = () => {
   const { allClients } = useGlobalContext();
 
-  const { allConductors } = useGlobalContext();
-
   const [currentPage, setCurrentPage] = useState(1);
 
-  const handlePageChange = (page: number) => {
-    setCurrentPage(page);
+  const [itemsPerPage, setItemPerPage] = useState<number>(3);
+
+  const indexOfLastPost = currentPage * itemsPerPage;
+  const indexOfFirstPost = indexOfLastPost - itemsPerPage;
+
+  const currentItems = allClients.slice(indexOfFirstPost, indexOfLastPost);
+
+  const handlePageChange = (e: React.ChangeEvent<unknown>, value: number) => {
+    setCurrentPage(value);
   };
 
   return (
     <>
       <Box>
-        <Box display="flex" justifyContent="center" alignItems="center" flexWrap="wrap">
+        <Box
+          display="flex"
+          justifyContent="center"
+          alignItems="center"
+          flexWrap="wrap"
+        >
           {allClients.length > 0 ? (
-            allClients.map((item) => (
+            currentItems.map((item) => (
               <ViewCard
                 key={item.id}
                 bairro={item.bairro}
@@ -43,12 +52,10 @@ const ClientList = () => {
             <div>Não ha clientes cadastrados</div>
           )}
         </Box>
-
         <Box display="flex" justifyContent="center" alignItems="center">
           <Pagination
-            totalItems={allClients.length}
-            itemsPerPage={4}
-            currentPage={currentPage}
+            page={currentPage}
+            count={Math.ceil(allClients.length / itemsPerPage)}
             onChange={handlePageChange}
           />
         </Box>

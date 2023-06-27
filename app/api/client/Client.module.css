@@ -10,6 +10,7 @@
     z-index: 1;
     overflow-x: hidden;
     background: #F0F2F0;
+    border: 1.5px solid black;
     /* fallback for old browsers */
     background: -webkit-linear-gradient(to top, #F0F2F0, #dbedfc, #000C40);
     /* Chrome 10-25, Safari 5.1-6 */
