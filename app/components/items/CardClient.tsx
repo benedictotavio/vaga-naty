@@ -10,7 +10,7 @@ import Typography from "@mui/material/Typography";
 
 import { useGlobalContext } from "@/app/context/store";
 import { Avatar, Modal, TextField } from "@mui/material";
-import { CloseRounded } from "@mui/icons-material";
+import { CloseRounded, Delete, Edit } from "@mui/icons-material";
 import styles from "@/app/api/client/Client.module.css";
 import Link from "next/link";
 import { PropsClient } from "@/app/api/client/ClientList";
@@ -228,10 +228,10 @@ export default function CardClient({
 
           <CardActions>
             <Button size="small" onClick={() => handleDelete(id)}>
-              Trash
+              <Delete />
             </Button>
             <Button size="small" onClick={handleOpen}>
-              Update
+              <Edit />
             </Button>
           </CardActions>
         </Card>

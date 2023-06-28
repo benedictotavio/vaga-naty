@@ -28,8 +28,18 @@ const ConductorList = () => {
 
   return (
     <>
-      <Box display="flex" justifyContent="center" alignItems="center">
-        <List sx={{ minWidth: 400, bgcolor: "background.paper" }}>
+      <Box
+        display="flex"
+        justifyContent="center"
+        flexWrap="wrap"
+        minHeight={500}
+      >
+        <List
+          sx={{
+            minWidth: 400,
+            bgcolor: "background.paper",
+          }}
+        >
           {allConductors.length > 0 ? (
             currentItems.map((item) => (
               <CardConductor

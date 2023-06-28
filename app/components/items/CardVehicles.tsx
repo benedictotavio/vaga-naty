@@ -49,15 +49,26 @@ const CardVehicles = ({
       console.error("Cliente não deletado!");
     }
   };
-  const handleEdit = async (payload: UpdateVehicles) => {
-    try {
-      if (payload) {
-        await editVehicle(payload);
-        window.alert("Cliente alterado com sucesso!");
+
+  const handleEdit = async () => {
+    if (window.confirm("Deseja editar o veiculo?") == true) {
+      try {
+        await editVehicle({
+          id: id as number,
+          anoFabricacao: yearManufacturing,
+          kmAtual: actualKm,
+          marcaModelo: modelCar,
+          placa: streetSign,
+        });
+        window.alert("Veiculo alterado com sucesso!");
+      } catch (error) {
+        console.error(error);
+        window.alert("Não foi possivel editar o cliente!");
+        return;
       }
-    } catch (error) {
-      console.error(error);
-      window.alert("Não foi possivel editar o cliente!");
+      location.reload();
+    } else {
+      console.error("Erro!");
     }
   };
 
@@ -77,21 +88,12 @@ const CardVehicles = ({
             <Button onClick={handleClose}>
               <CloseRounded />
             </Button>
-            <form
-              onSubmit={() =>
-                handleEdit({
-                  id: id as number,
-                  anoFabricacao: yearManufacturing,
-                  kmAtual: actualKm,
-                  marcaModelo: modelCar,
-                  placa: streetSign,
-                })
-              }
-            >
+            <form onSubmit={handleEdit}>
               <FormControl>
                 <TextField
                   type="text"
                   color="primary"
+                  label="Placa"
                   required
                   defaultValue={streetSign}
                   value={streetSign}
@@ -100,6 +102,7 @@ const CardVehicles = ({
                 <TextField
                   type="number"
                   color="secondary"
+                  label="Ano de Fabricação"
                   required
                   defaultValue={yearManufacturing}
                   value={yearManufacturing}
@@ -108,18 +111,14 @@ const CardVehicles = ({
                 <TextField
                   type="text"
                   color="warning"
-                  value={modelCar}
-                  onChange={(e) => setModelCar(e.target.value)}
-                />
-                <TextField
-                  type="text"
-                  color="warning"
+                  label="Modelo"
                   value={modelCar}
                   onChange={(e) => setModelCar(e.target.value)}
                 />
                 <TextField
                   type="number"
                   color="secondary"
+                  label="Km Atual"
                   required
                   defaultValue={actualKm}
                   value={actualKm}

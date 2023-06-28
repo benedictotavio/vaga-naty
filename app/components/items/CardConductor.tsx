@@ -26,6 +26,7 @@ const CardConductor = ({ id, nome, numeroHabilitacao }: PropsCondutor) => {
 
   return (
     <ListItem
+      sx={{ border: "1px solid black", borderRadius: 10, m: 0.5 }}
       secondaryAction={
         <Button size="small">
           <Delete onClick={() => handleDelete(id as number)} />

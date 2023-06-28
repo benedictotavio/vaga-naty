@@ -34,7 +34,7 @@ const DisplacementList = () => {
 
   return (
     <>
-      <Box>
+      <Box minHeight={500}>
         {displacement.length > 0 ? (
           currentItems.map((item) => (
             <>

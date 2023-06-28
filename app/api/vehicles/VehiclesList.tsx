@@ -15,7 +15,13 @@ const VehiclesList = () => {
 
   const [currentPage, setCurrentPage] = useState(1);
 
-  const [itemsPerPage, setItemPerPage] = useState<number>(8);
+  const [itemsPerPage, setItemPerPage] = useState<number>(
+    innerWidth > 1000 ? 8 : 4
+  );
+
+  console.log(innerWidth);
+
+  console.log(innerWidth > 1000 ? 8 : 4);
 
   const indexOfLastPost = currentPage * itemsPerPage;
   const indexOfFirstPost = indexOfLastPost - itemsPerPage;
@@ -31,14 +37,14 @@ const VehiclesList = () => {
       <Box
         display="flex"
         justifyContent="center"
-        alignItems="center"
         flexWrap="wrap"
+        minHeight={500}
       >
         {allVehicles.length > 0 ? (
-          currentItems.map((item) => (
+          currentItems.map((item, i) => (
             <>
               <CardVehicles
-                key={item.id}
+                key={i}
                 id={item.id}
                 placa={item.placa}
                 marcaModelo={item.marcaModelo}

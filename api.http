@@ -67,9 +67,22 @@ Content-Type: application/json
 ###
 GET https://api-deslocamento.herokuapp.com/api/v1/Veiculo
 
+###
+POST https://api-deslocamento.herokuapp.com/api/v1/Veiculo
+Content-Type: application/json
+
+{
+  "placa": "QSQ-2221",
+  "marcaModelo": "Palio",
+  "anoFabricacao": 2000,
+  "kmAtual": 0
+}
+
 # Deslocamento
 ###
 GET https://api-deslocamento.herokuapp.com/api/v1/Deslocamento/13
+
+
 
 ###
 POST https://api-deslocamento.herokuapp.com/api/v1/Deslocamento/IniciarDeslocamento
@@ -81,9 +94,9 @@ Content-Type: application/json
   "checkList": "Lista de trabalho",
   "motivo": "Saida para o trabalho",
   "observacao": "Inico de deslocamento de Teste",
-  "idCondutor": 79,
-  "idVeiculo": 53,
-  "idCliente": 158
+  "idCondutor": 42,
+  "idVeiculo": 24,
+  "idCliente": 43
 }
 
 ###

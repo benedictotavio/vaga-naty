@@ -95,7 +95,7 @@ const DispacementFormAdd = () => {
                     value={idClient}
                     onChange={(e) => setIdClient(+e.target.value)}
                     autoWidth
-                    label="Client"
+                    label="Cliente"
                   >
                     {allClients.map((item) => (
                       <MenuItem key={item.id} value={item.id}>
@@ -114,7 +114,7 @@ const DispacementFormAdd = () => {
                     value={idConductor}
                     onChange={(e) => setIdConductor(+e.target.value)}
                     autoWidth
-                    label="Conductor"
+                    label="Condutor"
                   >
                     {allConductors.map((item) => (
                       <MenuItem key={item.id} value={item.id}>
@@ -133,7 +133,7 @@ const DispacementFormAdd = () => {
                     value={idVehicle}
                     onChange={(e) => setIdVehicle(+e.target.value)}
                     autoWidth
-                    label="Vehicle"
+                    label="Veiculo"
                   >
                     {allVehicles.map((item) => (
                       <MenuItem key={item.id} value={item.id}>
@@ -145,6 +145,7 @@ const DispacementFormAdd = () => {
               </div>
               <div>
                 <Box width={300}>
+                  <Typography>Km Inicial</Typography>
                   <Slider
                     defaultValue={inicialKm}
                     value={inicialKm}
@@ -157,7 +158,7 @@ const DispacementFormAdd = () => {
               <div>
                 <TextField
                   id="dateInput"
-                  label="Select a date"
+                  label="Selecione a data"
                   type="date"
                   color="warning"
                   sx={{ m: 1, minWidth: 375 }}
@@ -170,11 +171,10 @@ const DispacementFormAdd = () => {
                     shrink: true,
                   }}
                 />
-              </div>
-              <div>
                 <TextField
                   type="text"
                   color="primary"
+                  label="CheckList"
                   required
                   sx={{ m: 1, minWidth: 375 }}
                   defaultValue={checkList}
@@ -187,34 +187,26 @@ const DispacementFormAdd = () => {
                   type="text"
                   color="primary"
                   required
+                  label="Motivo"
                   sx={{ m: 1, minWidth: 375 }}
                   defaultValue={reason}
                   value={reason}
                   onChange={(e) => setReason(e.target.value)}
                 />
-              </div>
-              <div>
                 <TextField
                   type="text"
                   color="primary"
                   required
-                  sx={{ m: 1, minWidth: 375 }}
-                  defaultValue={reason}
-                  value={reason}
-                  onChange={(e) => setReason(e.target.value)}
-                />
-              </div>
-              <div>
-                <TextField
-                  type="text"
-                  color="primary"
-                  required
+                  label="Observação"
                   sx={{ m: 1, minWidth: 375 }}
                   defaultValue={observation}
                   value={observation}
                   onChange={(e) => setObservation(e.target.value)}
                 />
               </div>
+              <Button type="submit" variant="contained" color="primary">
+                Enviar
+              </Button>
             </form>
           </div>
         </Box>

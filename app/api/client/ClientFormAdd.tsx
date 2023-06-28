@@ -216,7 +216,7 @@ const ClientForm = () => {
             </Box>
 
             <Button type="submit" variant="contained" color="primary">
-              Submit
+              Enviar
             </Button>
           </form>
         </Box>

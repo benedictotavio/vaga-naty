@@ -32,6 +32,7 @@ const ClientList = () => {
           justifyContent="center"
           alignItems="center"
           flexWrap="wrap"
+          minHeight={500}
         >
           {allClients.length > 0 ? (
             currentItems.map((item) => (

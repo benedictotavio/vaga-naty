@@ -59,16 +59,14 @@ const VehiclesFormAdd = () => {
                   color="primary"
                   label="Modelo"
                   required
-                  defaultValue={modelCar}
                   value={modelCar}
                   onChange={(e) => setModelCar(e.target.value)}
                 />
                 <TextField
-                  type="date"
+                  type="number"
                   color="secondary"
                   label="Ano de fabricação"
                   required
-                  defaultValue={yearManufacturing}
                   value={yearManufacturing}
                   onChange={(e) => setYearManufacturing(+e.target.value)}
                 />
@@ -77,7 +75,6 @@ const VehiclesFormAdd = () => {
                   type="text"
                   label="Placa"
                   color="warning"
-                  defaultValue={streetSign}
                   value={streetSign}
                   onChange={(e) => setStreetSign(e.target.value)}
                 />
@@ -85,14 +82,15 @@ const VehiclesFormAdd = () => {
                   type="text"
                   color="warning"
                   label="Km Atual"
-                  defaultValue={actualKm}
                   value={actualKm}
                   onChange={(e) => setActualKm(+e.target.value)}
                 />
               </FormControl>
-              <Button type="submit" variant="contained" color="primary">
-                Enviar
-              </Button>
+              <div>
+                <Button type="submit" variant="contained" color="primary">
+                  Enviar
+                </Button>
+              </div>
             </form>
           </div>
         </Box>

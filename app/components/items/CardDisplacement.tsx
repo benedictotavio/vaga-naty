@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 import Box from "@mui/material/Box";
 import Card from "@mui/material/Card";
@@ -16,7 +16,7 @@ import {
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import { useGlobalContext } from "@/app/context/store";
 import { useState } from "react";
-import { CloseRounded } from "@mui/icons-material";
+import { Delete } from "@mui/icons-material";
 
 export default function CardDisplacement({
   inicioDeslocamento,
@@ -27,16 +27,6 @@ export default function CardDisplacement({
 }: PropsDisplacement) {
   
   const { deleteDisplacement } = useGlobalContext();
-
-  const [open, setOpen] = useState<boolean>(false);
-
-  const handleClose = () => {
-    setOpen(false);
-  };
-
-  const handleOpen = () => {
-    setOpen(true);
-  };
 
   const handleDelete = async (user_id: number) => {
     if (window.confirm("Deseja deletar esse deslocamento?") == true) {
@@ -53,36 +43,6 @@ export default function CardDisplacement({
 
   return (
     <>
-      {/* <Modal
-        open={open}
-        onClose={handleClose}
-        aria-labelledby="parent-modal-title"
-        aria-describedby="parent-modal-description"
-        sx={{
-          backgroundColor: "#fff",
-          marginY: 10,
-        }}
-      >
-        <Box>
-          <div>
-            <div>
-              <Button onClick={handleClose}>
-                <CloseRounded />
-              </Button>
-            </div>
-            <div>
-              <h1>{id}</h1>
-              <h4>
-                {new Date(inicioDeslocamento).toLocaleDateString("pt-br", {
-                  dateStyle: "medium",
-                })}
-              </h4>
-            </div>
-            <Button href={`/deslocamento/${id}`}>Finalizar Deslocamento</Button>
-          </div>
-        </Box>
-      </Modal> */}
-
       <Box sx={{ minWidth: 275 }}>
         <Card variant="outlined">
           <CardContent>
@@ -128,11 +88,9 @@ export default function CardDisplacement({
           </CardContent>
           <CardActions>
             <Button size="small" onClick={() => handleDelete(id as number)}>
-              Delete
+              <Delete />
             </Button>
-            <Button href={`/deslocamento/${id}`}>
-              Visão Geral
-            </Button>
+            <Button href={`/deslocamento/${id}`}>Visão Geral</Button>
           </CardActions>
         </Card>
       </Box>
