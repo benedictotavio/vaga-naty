@@ -38,15 +38,6 @@ const ClientForm = () => {
         uf: country,
       });
       handleClose();
-      setInterval(() => {
-        setName("");
-        setDocumentNumber("");
-        setCity("");
-        setNeighborhood("");
-        setAddress("");
-        setNumber("");
-        setCountry("");
-      }, 2500);
     } catch (error) {
       console.error(error);
     }

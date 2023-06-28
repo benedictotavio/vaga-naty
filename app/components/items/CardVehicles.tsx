@@ -46,7 +46,7 @@ const CardVehicles = ({
         console.error("Erro!:", error);
       }
     } else {
-      console.error("Cliente não deletado!");
+      console.error("Veiculo não deletado!");
     }
   };
 

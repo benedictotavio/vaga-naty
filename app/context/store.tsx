@@ -19,7 +19,7 @@ import { PropsClient } from "../api/client/ClientList";
 interface GlobalContextProps {
   // Client
   saveClient: (payload: Client) => Promise<void>;
-  getClientById: (id: number) => Promise<any>;
+  getClientById: (id: number) => Promise<PropsClient>;
   deleteClient: (id: number) => Promise<void>;
   editClient: (payload: UpdateClient) => Promise<void>;
   allClients: PropsClient[];
@@ -39,7 +39,7 @@ interface GlobalContextProps {
   getDisplacementById: (id: number) => Promise<Displacement>;
 
   // Vehicles
-  getVehicleById: (id: number) => Promise<any>;
+  getVehicleById: (id: number) => Promise<PropsVehicles>;
   deleteVehicle: (id: number) => Promise<void>;
   editVehicle: (payload: UpdateVehicles) => Promise<void>;
   saveVehicle: (payload: Vehicles) => Promise<void>;

@@ -45,12 +45,16 @@ export default function CardClient({
   };
 
   const handleDelete = async (user_id: number) => {
-    try {
-      await deleteClient(user_id);
-      window.alert("Cliente deletado com sucesso");
-    } catch (error) {
-      console.error(error);
-      window.alert("Não foi possivel deletar o cliente");
+    if (window.confirm("Deseja deletar o cliente?") == true) {
+      try {
+        await deleteClient(user_id);
+        window.alert("Cliente deletado com sucesso");
+      } catch (error) {
+        console.error(error);
+        window.alert("Não foi possivel deletar o cliente");
+      }
+    } else {
+      console.error("Cliente não deletado!");
     }
   };
 

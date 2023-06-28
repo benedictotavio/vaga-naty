@@ -13,14 +13,13 @@ export interface UpdateVehicles extends Partial<Vehicles> {
 }
 
 export default function useVehicles() {
-  
   const [allVehicles, setAllVehicles] = useState<PropsVehicles[]>([]);
 
   useEffect(() => {
     getVehicles().then((res) => setAllVehicles(res));
   }, []);
 
-  async function getVehicleById(id: number): Promise<UpdateVehicles | void> {
+  async function getVehicleById(id: number) {
     try {
       const response = await fetch(
         `https://api-deslocamento.herokuapp.com/api/v1/Veiculo/${id}`
@@ -100,6 +99,6 @@ export default function useVehicles() {
     deleteVehicle,
     editVehicle,
     getVehicleById,
-    allVehicles
+    allVehicles,
   };
 }

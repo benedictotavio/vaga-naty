@@ -80,7 +80,7 @@ Content-Type: application/json
 
 # Deslocamento
 ###
-GET https://api-deslocamento.herokuapp.com/api/v1/Deslocamento/13
+GET https://api-deslocamento.herokuapp.com/api/v1/Deslocamento/98
 
 
 
@@ -100,11 +100,11 @@ Content-Type: application/json
 }
 
 ###
-PUT https://api-deslocamento.herokuapp.com/api/v1/Deslocamento/12/EncerrarDeslocamento
+PUT https://api-deslocamento.herokuapp.com/api/v1/Deslocamento/84/EncerrarDeslocamento
 Content-Type: application/json
 
 {
-  "id": 12,
+  "id": 84,
   "kmFinal": 330,
   "fimDeslocamento": "2023-06-24T02:56:07.493Z",
   "observacao": "Fim do deslocamento"

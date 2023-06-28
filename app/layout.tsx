@@ -16,7 +16,6 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <link rel="shortcut icon" href="./favicon.ico" />
       <body suppressHydrationWarning={true}>
         <GlobalContextProvider>
           <Navbar />

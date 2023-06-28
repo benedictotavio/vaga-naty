@@ -1,7 +1,7 @@
 "use client";
 
 import { Box } from "@mui/material";
-import Banner from "./components/Banner";
+import Banner from "./components/assets/Banner";
 import MediaCard from "./components/items/MediaCard";
 import styles from "./page.module.css";
 

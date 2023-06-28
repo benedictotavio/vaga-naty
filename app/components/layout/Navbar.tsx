@@ -29,7 +29,7 @@ import Link from "next/link";
 const pages = ["cliente", "condutor", "deslocamento", "veiculo"];
 const settings = ["Profile", "Account", "Dashboard", "Logout"];
 
-function Navbarzz() {
+function Navbar() {
   const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(
     null
   );
@@ -54,6 +54,7 @@ function Navbarzz() {
     <AppBar position="static"  id={styles.navbar}>
       <Container maxWidth="xl">
         <Toolbar disableGutters>
+
           <AltRouteIcon
             sx={{
               fontSize: "2.3em",
@@ -171,9 +172,11 @@ function Navbarzz() {
               ))}
             </Menu>
           </Box>
+          
         </Toolbar>
       </Container>
     </AppBar>
   );
 }
-export default Navbarzz;
+
+export default Navbar;

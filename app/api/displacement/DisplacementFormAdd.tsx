@@ -19,13 +19,15 @@ import { ChangeEvent, useState } from "react";
 const DispacementFormAdd = () => {
   //Property
   const [inicialKm, setInicialKm] = useState<number>(0);
-  const [inicialDisplacement, setInicialDisplacement] = useState(new Date());
+  const [inicialDisplacement, setInicialDisplacement] = useState("");
   const [checkList, setCheckList] = useState("");
   const [reason, setReason] = useState("");
   const [observation, setObservation] = useState("");
   const [idConductor, setIdConductor] = useState<number>(0);
   const [idVehicle, setIdVehicle] = useState<number>(0);
   const [idClient, setIdClient] = useState<number>(0);
+
+  console.log(inicialDisplacement);
 
   const { startDisplacement, allVehicles, allClients, allConductors } =
     useGlobalContext();
@@ -44,7 +46,7 @@ const DispacementFormAdd = () => {
     try {
       startDisplacement({
         kmInicial: inicialKm,
-        inicioDeslocamento: inicialDisplacement,
+        inicioDeslocamento: new Date(inicialDisplacement),
         checkList: checkList,
         motivo: reason,
         observacao: observation,
@@ -147,7 +149,6 @@ const DispacementFormAdd = () => {
                 <Box width={300}>
                   <Typography>Km Inicial</Typography>
                   <Slider
-                    defaultValue={inicialKm}
                     value={inicialKm}
                     aria-label="Default"
                     valueLabelDisplay="auto"
@@ -157,15 +158,12 @@ const DispacementFormAdd = () => {
               </div>
               <div>
                 <TextField
-                  id="dateInput"
                   label="Selecione a data"
                   type="date"
                   color="warning"
                   sx={{ m: 1, minWidth: 375 }}
-                  defaultValue={inicialDisplacement}
-                  value={inicialDisplacement}
                   onChange={(e: ChangeEvent<HTMLInputElement>) =>
-                    setInicialDisplacement(new Date(e.target.value))
+                    setInicialDisplacement(e.target.value)
                   }
                   InputLabelProps={{
                     shrink: true,
@@ -177,9 +175,11 @@ const DispacementFormAdd = () => {
                   label="CheckList"
                   required
                   sx={{ m: 1, minWidth: 375 }}
-                  defaultValue={checkList}
                   value={checkList}
                   onChange={(e) => setCheckList(e.target.value)}
+                  InputLabelProps={{
+                    shrink: true,
+                  }}
                 />
               </div>
               <div>
@@ -189,7 +189,6 @@ const DispacementFormAdd = () => {
                   required
                   label="Motivo"
                   sx={{ m: 1, minWidth: 375 }}
-                  defaultValue={reason}
                   value={reason}
                   onChange={(e) => setReason(e.target.value)}
                 />
@@ -199,7 +198,6 @@ const DispacementFormAdd = () => {
                   required
                   label="Observação"
                   sx={{ m: 1, minWidth: 375 }}
-                  defaultValue={observation}
                   value={observation}
                   onChange={(e) => setObservation(e.target.value)}
                 />
