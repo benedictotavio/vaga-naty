@@ -7,11 +7,26 @@ import { Skeleton } from "@mui/material";
 export default function Loading() {
   return (
     <Box
-      sx={{ display: "flex", justifyContent: "space-between", minHeight: 650, p: 10 }}
+      sx={{
+        display: "flex",
+        justifyContent: "space-between",
+        alignItems: "center",
+        flexWrap: "wrap",
+        minHeight: 650,
+        pt: 5,
+      }}
     >
-      <Skeleton variant="rectangular" width={550} height={450} />
-      <Skeleton variant="rectangular" width={550} height={450} />
-      <Skeleton variant="rectangular" width={550} height={450} />
+      <Box sx={{ display: "flex", justifyContent: "center", px: 0.1 }}>
+        <Skeleton variant="rectangular" width={250} height={150} />
+      </Box>
+
+      <Box sx={{ display: "flex", justifyContent: "center", px: 0.1 }}>
+        <Skeleton variant="rectangular" width={250} height={150} />
+      </Box>
+
+      <Box sx={{ display: "flex", justifyContent: "center", px: 0.1 }}>
+        <Skeleton variant="rectangular" width={250} height={150} />
+      </Box>
     </Box>
   );
 }

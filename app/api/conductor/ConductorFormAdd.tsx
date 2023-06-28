@@ -11,7 +11,7 @@ const ConductorFormAdd = () => {
   // Property
   const [name, setName] = useState("");
   const [cnh, setCnh] = useState("");
-  const [expireCnh, setExpireCnh] = useState(new Date());
+  const [expireCnh, setExpireCnh] = useState("");
   const [cnhCategory, setCnhCategory] = useState("");
 
   const { saveConductor } = useGlobalContext();
@@ -30,7 +30,7 @@ const ConductorFormAdd = () => {
         catergoriaHabilitacao: cnhCategory,
         nome: name,
         numeroHabilitacao: cnh,
-        vencimentoHabilitacao: expireCnh,
+        vencimentoHabilitacao: new Date(expireCnh),
       });
     } catch (error) {
       window.alert("Erro ao adicionar o condutor");
@@ -59,9 +59,10 @@ const ConductorFormAdd = () => {
                   color="primary"
                   label="Nome"
                   required
-                  defaultValue={name}
                   value={name}
-                  onChange={(e) => setName(e.target.value)}
+                  onChange={(e: ChangeEvent<HTMLInputElement>) =>
+                    setName(e.target.value)
+                  }
                 />
                 <TextField
                   type="text"
@@ -69,9 +70,10 @@ const ConductorFormAdd = () => {
                   color="secondary"
                   label="Nº CNH"
                   required
-                  defaultValue={cnh}
                   value={cnh}
-                  onChange={(e) => setCnh(e.target.value)}
+                  onChange={(e: ChangeEvent<HTMLInputElement>) =>
+                    setCnh(e.target.value)
+                  }
                 />
                 <TextField
                   id="dateInput"
@@ -79,10 +81,9 @@ const ConductorFormAdd = () => {
                   label="Selecione a data"
                   type="date"
                   color="warning"
-                  defaultValue={expireCnh}
                   value={expireCnh}
                   onChange={(e: ChangeEvent<HTMLInputElement>) =>
-                    setExpireCnh(new Date(e.target.value))
+                    setExpireCnh(e.target.value)
                   }
                   InputLabelProps={{
                     shrink: true,

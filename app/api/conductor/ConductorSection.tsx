@@ -36,7 +36,7 @@ const UserSection = ({ id }: PropClients) => {
   const [open, setOpen] = useState(false);
   const [name, setName] = useState("");
   const [cnh, setCnh] = useState("");
-  const [expireCnh, setExpireCnh] = useState<Date>(new Date());
+  const [expireCnh, setExpireCnh] = useState("");
   const [cnhCategory, setCnhCategory] = useState("");
 
   useEffect(() => {
@@ -44,7 +44,7 @@ const UserSection = ({ id }: PropClients) => {
       setUser(res);
       setName(res.nome);
       setCnh(res.numeroHabilitacao);
-      setExpireCnh(res.vencimentoHabilitacao);
+      setExpireCnh(res.vencimentoHabilitacao.toString());
       setCnhCategory(res.catergoriaHabilitacao);
     });
   }, [getConductorById, id]);
@@ -92,7 +92,7 @@ const UserSection = ({ id }: PropClients) => {
                   catergoriaHabilitacao: cnhCategory,
                   nome: name,
                   numeroHabilitacao: cnh,
-                  vencimentoHabilitacao: expireCnh,
+                  vencimentoHabilitacao: new Date(expireCnh),
                 })
               }
             >
@@ -112,7 +112,9 @@ const UserSection = ({ id }: PropClients) => {
                     color="warning"
                     label="Categoria CNH"
                     value={cnhCategory}
-                    onChange={(e) => setCnhCategory(e.target.value)}
+                    onChange={(e: ChangeEvent<HTMLInputElement>) =>
+                      setCnhCategory(e.target.value)
+                    }
                   />
                   <TextField
                     type="text"
@@ -121,7 +123,9 @@ const UserSection = ({ id }: PropClients) => {
                     required
                     defaultValue={cnh}
                     value={cnh}
-                    onChange={(e) => setCnh(e.target.value)}
+                    onChange={(e: ChangeEvent<HTMLInputElement>) =>
+                      setCnh(e.target.value)
+                    }
                   />
                 </div>
 
@@ -133,7 +137,7 @@ const UserSection = ({ id }: PropClients) => {
                   defaultValue={expireCnh}
                   value={expireCnh}
                   onChange={(e: ChangeEvent<HTMLInputElement>) =>
-                    setExpireCnh(new Date(e.target.value))
+                    setExpireCnh(e.target.value)
                   }
                   InputLabelProps={{
                     shrink: true,
